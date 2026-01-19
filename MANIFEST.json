@@ -1,7 +1,7 @@
 {
     "manifest_version": "1.0",
     "name": "YouTube Keystrokes Blocker",
-    "version": "2.0",
+    "version": "4.1",
     "description": "Control YouTube keyboard shortcuts with fine-grained settings. Block distracting hotkeys while keeping the ones you need.",
     "metadata": {
         "id": "youtube-keystrokes-blocker",
@@ -22,7 +22,7 @@
         "github": "VKrishna04",
         "organization": "Life-Experimentalist",
         "website": "https://vkrishna04.me",
-        "email": null
+        "email": "hello@vkrishna04.me"
     },
     "repository": {
         "type": "git",
@@ -30,8 +30,10 @@
         "branch": "main"
     },
     "links": {
-        "homepage": "https://Life-Experimentalist.github.io/Youtube-Keystrokes-Blocker/",
+        "homepage": "https://yt-hotkeys.vkrishna04.me/",
         "documentation": "https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker",
+        "marketplace": "https://greasyfork.org/en/scripts/563265-disable-youtube-hotkeys-with-modern-settings-page",
+        "changelog": "https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker/commits/main",
         "issues": "https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker/issues",
         "releases": "https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker/releases",
         "discussions": "https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker/discussions"

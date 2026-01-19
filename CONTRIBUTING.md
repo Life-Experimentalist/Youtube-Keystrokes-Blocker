@@ -150,7 +150,7 @@ const getValue = () => { /* ... */ };
 ```css
 /* Use CSS variables for consistency */
 :root {
-  --primary: #ff0000;
+  --primary: #ff0033;
   --text-light: #f5f5f5;
 }
 

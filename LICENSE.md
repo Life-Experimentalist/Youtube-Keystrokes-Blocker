@@ -161,7 +161,7 @@ APPENDIX: How to apply the Apache License to your work.
    "printed page" as the copyright notice for easier identification
    within third-party archives.
 
-      Copyright 2024-2026 VKrishna04
+      Copyright 2024-2026 [VKrishna04](https://github.com/VKrishna04)
 
       Licensed under the Apache License, Version 2.0 (the "License");
       you may not use this file except in compliance with the License.

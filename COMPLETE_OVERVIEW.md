@@ -66,7 +66,7 @@ Your YouTube Keystrokes Blocker project is now **professionally complete** with:
 
 ### Design Elements
 - ✅ Dark theme (YouTube-inspired)
-- ✅ Red gradient accents (#ff0000)
+- ✅ Red gradient accents (#ff0033)
 - ✅ Smooth animations
 - ✅ Responsive design (mobile/tablet/desktop)
 - ✅ Glassmorphism effects
@@ -137,7 +137,7 @@ Your YouTube Keystrokes Blocker project is now **professionally complete** with:
 
 ### Color Palette
 ```
-Primary:     #ff0000 (YouTube Red)
+Primary:     #ff0033 (YouTube Red)
 Dark Red:    #cc0000 (Hover State)
 Light Red:   #ff3333 (Accent)
 Accent:      #3ea6ff (Secondary)
@@ -208,7 +208,7 @@ Mobile:   < 768px (Single column)
 4. Site goes live in minutes!
 ```
 
-**Site URL:** `https://Life-Experimentalist.github.io/Youtube-Keystrokes-Blocker/`
+**Site URL:** `https://yt-hotkeys.vkrishna04.me/`
 
 ### Option 2: Local Testing
 ```bash

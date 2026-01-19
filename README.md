@@ -2,9 +2,7 @@
 
 A powerful userscript that gives you fine-grained control over YouTube keyboard shortcuts. Block distracting hotkeys while keeping the ones you need active.
 
-![License](https://img.shields.io/badge/license-Apache%202.0-blue)
-![Version](https://img.shields.io/badge/version-2.0-green)
-![Platform](https://img.shields.io/badge/platform-Browser%20Userscript-orange)
+[![Greasy Fork](https://img.shields.io/badge/Greasy%20Fork-563265-FF0000?style=flat-square&logo=tampermonkey&logoColor=white)](https://greasyfork.org/en/scripts/563265-disable-youtube-hotkeys-with-modern-settings-page) ![Version](https://img.shields.io/badge/version-4.1-brightgreen?style=flat-square) ![License](https://img.shields.io/badge/license-Apache%202.0-blue?style=flat-square) ![Platform](https://img.shields.io/badge/platform-Browser%20Userscript-orange?style=flat-square) ![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-yellow?style=flat-square) ![Size](https://img.shields.io/badge/size-~13KB-blue?style=flat-square)
 
 ## 📌 Features
 
@@ -35,11 +33,19 @@ A powerful userscript that gives you fine-grained control over YouTube keyboard 
 
 ## 🚀 Installation
 
-### Option 1: Direct Install (Recommended)
+### Option 1: Greasy Fork (Recommended)
+[![Install from Greasy Fork](https://img.shields.io/badge/Install%20from-Greasy%20Fork-FF0000?style=flat-square&logo=tampermonkey&logoColor=white)](https://greasyfork.org/en/scripts/563265-disable-youtube-hotkeys-with-modern-settings-page)
+
+1. Click the button above or visit the [Greasy Fork page](https://greasyfork.org/en/scripts/563265-disable-youtube-hotkeys-with-modern-settings-page)
+2. Click "Install this script"
+3. Your userscript manager will handle the rest
+4. Automatic daily updates will keep you current
+
+### Option 2: Direct GitHub Install
 Click this link to install directly:
 👉 **[Install YouTube Keystrokes Blocker](https://raw.githubusercontent.com/Life-Experimentalist/Youtube-Keystrokes-Blocker/main/disable-yt-hotkeys.user.js)**
 
-### Option 2: Manual Installation
+### Option 3: Manual Installation
 
 1. **Install a Userscript Manager**
    - [Tampermonkey](https://www.tampermonkey.net/) (Recommended - Chrome, Firefox, Edge, Safari)
@@ -60,6 +66,11 @@ Click this link to install directly:
    - Visit [youtube.com](https://www.youtube.com)
    - Look for the **keyboard icon** (⌨️) in the video player controls
    - Click to configure your hotkeys
+
+### ⏰ Update Frequency
+- **Greasy Fork install**: Automatic daily checks for updates
+- **GitHub install**: Manual updates recommended every 1-2 weeks
+- Updates include bug fixes, feature improvements, and YouTube compatibility fixes
 
 ## 💡 Usage
 
@@ -164,6 +175,23 @@ Part of the [Life Experimentalist](https://github.com/Life-Experimentalist) orga
 
 ## 📊 Version History
 
+### v4.1 (Latest)
+- YouTube-native red color scheme (#ff0033) for all UI elements
+- Proper Greasy Fork integration with daily update support
+- Email contact field added for direct support
+- Improved update URLs and download mechanism
+- Enhanced animation timing (150ms cubic-bezier)
+- Full-row clickable settings menu
+- YouTube CSS variables integration for theme auto-detection
+
+### v4.0
+- Complete UI overhaul with YouTube-native design
+- CSS variables for automatic light/dark mode detection
+- Modern modal with proper z-index layering (2201-2202)
+- Smooth animations with cubic-bezier easing
+- Full-row clickable interface
+- Keyboard accessibility with focus states
+
 ### v2.0
 - Modern settings modal with toggle switches
 - Per-hotkey control (not all-or-nothing)
@@ -181,4 +209,17 @@ Your support helps us continue improving this script and creating more useful to
 
 ---
 
-**Last Updated:** January 2026 | **Active Development** ✅
+**Last Updated:** January 19, 2026 | **Version 4.1** | **Active Development** ✅
+
+**Status**: Production Ready | Downloads via Greasy Fork | Daily Auto-Updates Enabled
+
+---
+
+## 🎯 Quick Links
+
+| Link                                                                                                        | Purpose                                   |
+| ----------------------------------------------------------------------------------------------------------- | ----------------------------------------- |
+| [📦 Greasy Fork](https://greasyfork.org/en/scripts/563265-disable-youtube-hotkeys-with-modern-settings-page) | Official distribution & automatic updates |
+| [🐛 GitHub Issues](https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker/issues)                | Report bugs & request features            |
+| [📝 GitHub Repo](https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker)                         | View source code & contribute             |
+| [🏠 Author Homepage](https://vkrishna04.me)                                                                  | Learn more about the author               |

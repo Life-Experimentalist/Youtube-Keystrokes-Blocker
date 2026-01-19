@@ -4,8 +4,8 @@
 # Site metadata
 title: YouTube Keystrokes Blocker
 description: Take control of YouTube keyboard shortcuts with fine-grained settings
-url: https://Life-Experimentalist.github.io/Youtube-Keystrokes-Blocker
-baseurl: /Youtube-Keystrokes-Blocker
+url: https://yt-hotkeys.vkrishna04.me
+baseurl: /yt-hotkeys
 
 # Author information
 author:
@@ -64,7 +64,7 @@ sass:
   style: compressed
 
 # Timezone
-timezone: UTC
+timezone: Asia/Kolkata
 
 # Locale
 locale: en_US

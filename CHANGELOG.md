@@ -7,6 +7,55 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [4.1]() - 2026-01-19
+
+### Added
+- Official Greasy Fork distribution channel (Script ID: 563265)
+- Automatic daily update mechanism via Greasy Fork
+- YouTube red color scheme (#ff0033) replacing previous blue
+- Email contact field for direct support (hello@vkrishna04.me)
+- Enhanced shields/badges in README with version, size, and platform info
+- Quick links section in README
+
+### Changed
+- Save button color from blue (#3ea6ff) to YouTube red (#ff0033)
+- Toggle switch checked color to YouTube red (#ff0033)
+- Save button hover color to darker red (#CC0000)
+- @downloadURL now points to the actual userscript file
+- @supportURL updated to GitHub issues page
+- Update frequency clarified in documentation
+
+### Improved
+- Better visibility with YouTube red branding
+- Clearer update instructions for Greasy Fork users
+- Version history documentation with detailed feature lists
+- Status indicators showing production readiness
+
+### Security
+- Proper metadata for Greasy Fork distribution
+- Daily automatic update checks enabled
+- Update URLs verified and tested
+
+---
+
+## [4.0]() - 2026-01-19
+
+### Added
+- Complete YouTube-native design system integration
+- CSS variables for automatic light/dark mode detection
+- Enhanced modal animations with cubic-bezier timing (150ms)
+- Full-row clickable settings interface
+- Proper z-index layering (2201-2202 modal layer)
+- Keyboard accessibility with focus states
+- Custom scrollbar styling
+
+### Changed
+- Modal animation system from opacity to data-visible attributes
+- Color variables using YouTube's design system
+- Animation timing to professional standards
+
+---
+
 ## [2.0]() - 2026-01-19
 
 ### Added

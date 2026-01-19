@@ -7,7 +7,9 @@
       name="description"
       content="YouTube Keystrokes Blocker - Take control of YouTube keyboard shortcuts with fine-grained settings."
     />
-    <meta name="theme-color" content="#ff0000" />
+    <meta name="theme-color" content="#ff0033" />
+    <meta name="darkreader-lock">
+    <meta property="og:type" content="website" />
     <meta property="og:title" content="YouTube Keystrokes Blocker" />
     <meta
       property="og:description"
@@ -17,11 +19,10 @@
       property="og:image"
       content="https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker/raw/main/assets/preview.png"
     />
-    <meta
-      property="og:url"
-      content="https://Life-Experimentalist.github.io/Youtube-Keystrokes-Blocker/"
-    />
+    <meta property="og:url" content="https://yt-hotkeys.vkrishna04.me/" />
     <title>YouTube Keystrokes Blocker - Control YouTube Hotkeys</title>
+    <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg" sizes="64x64">
+    <link rel="apple-touch-icon" href="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg">
     <style>
       * {
         margin: 0;
@@ -30,7 +31,7 @@
       }
 
       :root {
-        --primary: #ff0000;
+        --primary: #ff0033;
         --primary-dark: #cc0000;
         --primary-light: #ff3333;
         --text-light: #f5f5f5;
@@ -109,6 +110,35 @@
         margin: 0 auto;
         padding: 6rem 2rem;
         text-align: center;
+        position: relative;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 600px;
+        height: 400px;
+        background: radial-gradient(
+          circle,
+          rgba(255, 0, 0, 0.1) 0%,
+          transparent 70%
+        );
+        border-radius: 50%;
+        z-index: -1;
+        animation: glow 4s ease-in-out infinite;
+      }
+
+      @keyframes glow {
+        0%,
+        100% {
+          opacity: 0.5;
+        }
+        50% {
+          opacity: 1;
+        }
       }
 
       .hero h1 {
@@ -123,6 +153,18 @@
         -webkit-text-fill-color: transparent;
         background-clip: text;
         font-weight: 900;
+        animation: slideInDown 0.8s ease-out;
+      }
+
+      @keyframes slideInDown {
+        from {
+          opacity: 0;
+          transform: translateY(-30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
 
       .hero p {
@@ -154,6 +196,29 @@
         display: inline-flex;
         align-items: center;
         gap: 0.5rem;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .btn::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.2);
+        transition: left 0.3s ease;
+        z-index: 0;
+      }
+
+      .btn:hover::before {
+        left: 100%;
+      }
+
+      .btn > * {
+        position: relative;
+        z-index: 1;
       }
 
       .btn-primary {
@@ -211,12 +276,56 @@
         padding: 2rem;
         transition: all 0.3s;
         cursor: pointer;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .feature-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(255, 0, 0, 0.1) 0%,
+          transparent 100%
+        );
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .feature-card::after {
+        content: "";
+        position: absolute;
+        top: -50%;
+        right: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+          circle,
+          rgba(255, 0, 0, 0.3) 0%,
+          transparent 70%
+        );
+        opacity: 0;
+        transition: opacity 0.3s ease;
       }
 
       .feature-card:hover {
         border-color: var(--primary);
         transform: translateY(-4px);
         box-shadow: 0 12px 24px rgba(255, 0, 0, 0.1);
+      }
+
+      .feature-card:hover::before,
+      .feature-card:hover::after {
+        opacity: 1;
+      }
+
+      .feature-card > * {
+        position: relative;
+        z-index: 1;
       }
 
       .feature-icon {
@@ -244,21 +353,57 @@
 
       .hotkeys-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        grid-template-columns: repeat(3, 1fr);
         gap: 1.5rem;
         margin-bottom: 4rem;
       }
 
       .hotkey-item {
-        background: var(--bg-card);
+        background: linear-gradient(
+          135deg,
+          var(--bg-card) 0%,
+          rgba(255, 0, 0, 0.05) 100%
+        );
         border: 1px solid var(--bg-secondary);
         border-radius: 8px;
         padding: 1.5rem;
-        transition: all 0.3s;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+
+      .hotkey-item::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        right: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+          circle,
+          rgba(255, 0, 0, 0.2) 0%,
+          transparent 70%
+        );
+        opacity: 0;
+        transition: opacity 0.3s ease;
       }
 
       .hotkey-item:hover {
         border-color: var(--accent);
+        transform: translateY(-4px);
+        box-shadow: 0 8px 20px rgba(255, 0, 0, 0.15);
+      }
+
+      .hotkey-item:hover::before {
+        opacity: 1;
+      }
+
+      .hotkey-item > * {
+        position: relative;
+        z-index: 1;
       }
 
       .hotkey-key {
@@ -268,14 +413,31 @@
         border-radius: 6px;
         font-weight: 700;
         display: inline-block;
-        margin-bottom: 0.5rem;
         font-family: "Courier New", monospace;
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+
+      .hotkey-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        flex: 1;
+      }
+
+      .hotkey-info p {
+        margin: 0;
+      }
+
+      .hotkey-info p:first-child {
+        font-weight: 500;
+        color: var(--text-light);
+        margin-bottom: 0.25rem;
       }
 
       .hotkey-desc {
         color: #b0b0b0;
         font-size: 0.9rem;
-        margin-top: 0.5rem;
       }
 
       /* Settings Demo */
@@ -355,9 +517,33 @@
         background: linear-gradient(
           135deg,
           var(--bg-secondary) 0%,
-          rgba(255, 0, 0, 0.05) 100%
+          rgba(255, 0, 0, 0.08) 50%,
+          var(--bg-secondary) 100%
         );
+        border: 1px solid rgba(255, 0, 0, 0.2);
         border-radius: 12px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .installation::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(
+          ellipse at top left,
+          rgba(255, 0, 0, 0.1) 0%,
+          transparent 60%
+        );
+        pointer-events: none;
+      }
+
+      .installation > * {
+        position: relative;
+        z-index: 1;
       }
 
       .steps {
@@ -412,21 +598,58 @@
         justify-content: center;
         gap: 2rem;
         flex-wrap: wrap;
-        margin-top: 2rem;
+        margin-top: 3rem;
+        margin-bottom: 3rem;
       }
 
       .browser {
         text-align: center;
+        transition: all 0.3s ease;
+      }
+
+      .browser:hover {
+        transform: scale(1.1);
       }
 
       .browser-icon {
-        font-size: 3rem;
-        margin-bottom: 0.5rem;
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 0.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(
+          135deg,
+          rgba(255, 0, 0, 0.1),
+          rgba(255, 0, 0, 0.05)
+        );
+        border-radius: 12px;
+        border: 1px solid var(--bg-secondary);
+        transition: all 0.3s ease;
+      }
+
+      .browser:hover .browser-icon {
+        border-color: var(--primary);
+        box-shadow: 0 8px 16px rgba(255, 0, 0, 0.2);
+      }
+
+      .browser-icon svg {
+        width: 48px;
+        height: 48px;
+        fill: currentColor;
       }
 
       .browser-name {
         font-weight: 600;
         color: var(--text-light);
+        margin-top: 0.5rem;
+      }
+
+      .managers-title {
+        font-size: 1.3rem;
+        margin-top: 3rem;
+        margin-bottom: 2rem;
+        color: var(--primary);
       }
 
       /* FAQ Section */
@@ -442,6 +665,12 @@
         border-radius: 8px;
         margin-bottom: 1rem;
         overflow: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .faq-item:hover {
+        border-color: var(--primary);
+        box-shadow: 0 8px 16px rgba(255, 0, 0, 0.1);
       }
 
       .faq-question {
@@ -453,6 +682,23 @@
         font-weight: 600;
         transition: background 0.3s;
         user-select: none;
+        position: relative;
+      }
+
+      .faq-question::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 4px;
+        background: var(--primary);
+        transform: scaleY(0);
+        transition: transform 0.3s ease;
+      }
+
+      .faq-item.active .faq-question::before {
+        transform: scaleY(1);
       }
 
       .faq-question:hover {
@@ -486,16 +732,39 @@
 
       /* Footer */
       footer {
-        background: var(--bg-secondary);
-        border-top: 1px solid var(--bg-secondary);
+        background: linear-gradient(
+          135deg,
+          var(--bg-card) 0%,
+          rgba(255, 0, 0, 0.05) 100%
+        );
+        border-top: 2px solid var(--primary);
         padding: 3rem 2rem;
         margin-top: 5rem;
         text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      footer::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--primary),
+          transparent
+        );
       }
 
       .footer-content {
         max-width: 1200px;
         margin: 0 auto;
+        position: relative;
+        z-index: 1;
       }
 
       .footer-links {
@@ -522,6 +791,12 @@
       }
 
       /* Responsive */
+      @media (max-width: 1024px) {
+        .hotkeys-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
       @media (max-width: 768px) {
         .nav-links {
           gap: 1rem;
@@ -579,7 +854,14 @@
     <!-- Navigation -->
     <nav>
       <div class="nav-container">
-        <div class="logo">⌨️ YT Keystrokes Blocker</div>
+        <div class="logo">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg"
+            width="64"
+            height="64"
+          />
+          Keystrokes Blocker
+        </div>
         <ul class="nav-links">
           <li><a href="#features">Features</a></li>
           <li><a href="#hotkeys">Hotkeys</a></li>
@@ -681,48 +963,66 @@
       <div class="hotkeys-grid">
         <div class="hotkey-item">
           <div class="hotkey-key">0 - 9</div>
-          <p>Numbers</p>
-          <p class="hotkey-desc">Jump to timeline percentage</p>
+          <div class="hotkey-info">
+            <p>Numbers</p>
+            <p class="hotkey-desc">Jump to timeline percentage</p>
+          </div>
         </div>
         <div class="hotkey-item">
           <div class="hotkey-key">SPACE</div>
-          <p>Spacebar</p>
-          <p class="hotkey-desc">Play/Pause</p>
+          <div class="hotkey-info">
+            <p>Spacebar</p>
+            <p class="hotkey-desc">Play/Pause</p>
+          </div>
         </div>
         <div class="hotkey-item">
           <div class="hotkey-key">↑ ↓ ← →</div>
-          <p>Arrow Keys</p>
-          <p class="hotkey-desc">Navigation in comments/timeline</p>
+          <div class="hotkey-info">
+            <p>Arrow Keys</p>
+            <p class="hotkey-desc">Navigation in comments/timeline</p>
+          </div>
         </div>
         <div class="hotkey-item">
           <div class="hotkey-key">CTRL + ←</div>
-          <p>Control + Left</p>
-          <p class="hotkey-desc">Previous chapter</p>
+          <div class="hotkey-info">
+            <p>Control + Left</p>
+            <p class="hotkey-desc">Previous chapter</p>
+          </div>
         </div>
         <div class="hotkey-item">
           <div class="hotkey-key">CTRL + →</div>
-          <p>Control + Right</p>
-          <p class="hotkey-desc">Next chapter</p>
+          <div class="hotkey-info">
+            <p>Control + Right</p>
+            <p class="hotkey-desc">Next chapter</p>
+          </div>
         </div>
         <div class="hotkey-item">
           <div class="hotkey-key">F</div>
-          <p>F Key</p>
-          <p class="hotkey-desc">Fullscreen toggle</p>
+          <div class="hotkey-info">
+            <p>F Key</p>
+            <p class="hotkey-desc">Fullscreen toggle</p>
+          </div>
         </div>
         <div class="hotkey-item">
           <div class="hotkey-key">M</div>
-          <p>M Key</p>
-          <p class="hotkey-desc">Mute/Unmute</p>
+          <div class="hotkey-info">
+            <p>M Key</p>
+            <p class="hotkey-desc">Mute/Unmute</p>
+          </div>
         </div>
         <div class="hotkey-item">
           <div class="hotkey-key">SHIFT + < or ></div>
-          <p>Shift + Less/Greater</p>
-          <p class="hotkey-desc">Playback speed control</p>
+          <div class="hotkey-info">
+            <p>Shift + Less / Greater</p>
+            <p class="hotkey-desc">Playback speed control</p>
+          </div>
         </div>
         <div class="hotkey-item">
           <div class="hotkey-key">. ,</div>
-          <p>Period/Comma</p>
-          <p class="hotkey-desc">Frame-by-frame navigation</p>
+          <div class="hotkey-info">
+            <p>Period/Comma</p>
+            <p class="hotkey-desc">Frame-by-frame navigation</p>
+          </div>
         </div>
       </div>
     </section>
@@ -731,7 +1031,11 @@
     <section class="settings-demo">
       <h2 class="section-title">Live Settings Demo</h2>
       <div class="demo-modal">
-        <div class="demo-header">⌨️ Hotkey Settings</div>
+        <div class="demo-header">            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg"
+              width="16"
+              height="16"
+            /> Hotkey Settings</div>
         <div class="demo-setting">
           <span class="demo-label">Disable Numbers (0–9)</span>
           <div class="toggle active" onclick="this.classList.toggle('active')">
@@ -830,20 +1134,89 @@
       <h2 class="section-title">Supported Browsers</h2>
       <div class="browsers">
         <div class="browser">
-          <div class="browser-icon">🌐</div>
+          <div class="browser-icon">
+            <img
+              src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/chrome/chrome-original.svg"
+              width="48"
+              height="48"
+            />
+          </div>
           <div class="browser-name">Chrome</div>
         </div>
         <div class="browser">
-          <div class="browser-icon">🦊</div>
+          <div class="browser-icon">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/a/a0/Firefox_logo%2C_2019.svg"
+              width="48"
+              height="48"
+            />
+          </div>
           <div class="browser-name">Firefox</div>
         </div>
         <div class="browser">
-          <div class="browser-icon">⚡</div>
+          <div class="browser-icon">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/9/98/Microsoft_Edge_logo_%282019%29.svg"
+              width="48"
+              height="48"
+            />
+          </div>
           <div class="browser-name">Edge</div>
         </div>
         <div class="browser">
-          <div class="browser-icon">🧭</div>
-          <div class="browser-name">Safari</div>
+          <div class="browser-icon">
+            <img
+              src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/safari/safari-original.svg"
+              width="48"
+              height="48"
+            />
+          </div>
+          <div class="browser-name">And Others..</div>
+        </div>
+      </div>
+
+      <div class="managers-title">Supported Userscript Managers</div>
+      <div class="browsers">
+        <div class="browser">
+          <div class="browser-icon">
+            <svg
+              role="img"
+              viewBox="0 0 48 48"
+              xmlns="http://www.w3.org/2000/svg"
+              id="Tampermonkey--Streamline-Simple-Icons"
+              height="48"
+              width="48"
+            >
+              <desc>Tampermonkey</desc>
+              <title>Tampermonkey</title>
+              <path
+                d="M11.91 0.004C6 -0.142 0.55 4.772 0.086 10.67c-0.138 6.64 -0.022 13.292 -0.06 19.938 0.12 3.74 -0.552 7.746 1.43 11.146 2.166 4.152 6.912 6.576 11.54 6.21 8.006 -0.022 16.016 0.044 24.022 -0.034 5.906 -0.312 10.956 -5.63 10.964 -11.544 -0.014 -8.47 0.046 -16.946 -0.03 -25.416C47.64 5.066 42.32 0.014 36.41 0.006c-8.166 -0.01 -16.334 0 -24.5 -0.004zm0.894 25.366c4.666 -0.092 9.012 3.61 9.66 8.232 0.824 4.574 -2.112 9.432 -6.548 10.822 -4.374 1.566 -9.65 -0.536 -11.748 -4.682 -2.274 -4.078 -1.04 -9.654 2.74 -12.394a9.792 9.792 0 0 1 5.896 -1.98zm22.49 0c4.666 -0.092 9.01 3.61 9.658 8.232 0.826 4.574 -2.112 9.432 -6.546 10.822 -4.376 1.566 -9.65 -0.536 -11.75 -4.682 -2.272 -4.078 -1.04 -9.654 2.74 -12.394a9.792 9.792 0 0 1 5.898 -1.98z"
+                fill="currentColor"
+                stroke-width="2"
+              ></path>
+            </svg>
+          </div>
+          <div class="browser-name">Tampermonkey</div>
+        </div>
+        <div class="browser">
+          <div class="browser-icon">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/f/fc/Greasemonkey.svg"
+              width="48"
+              height="48"
+            />
+          </div>
+          <div class="browser-name">Greasemonkey</div>
+        </div>
+        <div class="browser">
+          <div class="browser-icon">
+            <img
+              src="https://violentmonkey.github.io/_astro/vm.C4h557K-.png"
+              width="48"
+              height="48"
+            />
+          </div>
+          <div class="browser-name">Violentmonkey</div>
         </div>
       </div>
     </section>
