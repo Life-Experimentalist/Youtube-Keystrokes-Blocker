@@ -1,0 +1,232 @@
+{
+    "manifest_version": "1.0",
+    "name": "YouTube Keystrokes Blocker",
+    "version": "2.0",
+    "description": "Control YouTube keyboard shortcuts with fine-grained settings. Block distracting hotkeys while keeping the ones you need.",
+    "metadata": {
+        "id": "youtube-keystrokes-blocker",
+        "type": "userscript",
+        "categories": [
+            "video",
+            "productivity",
+            "youtube"
+        ],
+        "rating": {
+            "stars": 5,
+            "votes": 0,
+            "status": "active"
+        }
+    },
+    "author": {
+        "name": "VKrishna04",
+        "github": "VKrishna04",
+        "organization": "Life-Experimentalist",
+        "website": "https://vkrishna04.me",
+        "email": null
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker.git",
+        "branch": "main"
+    },
+    "links": {
+        "homepage": "https://Life-Experimentalist.github.io/Youtube-Keystrokes-Blocker/",
+        "documentation": "https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker",
+        "issues": "https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker/issues",
+        "releases": "https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker/releases",
+        "discussions": "https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker/discussions"
+    },
+    "urls": {
+        "script": "https://raw.githubusercontent.com/Life-Experimentalist/Youtube-Keystrokes-Blocker/main/disable-yt-hotkeys.user.js",
+        "update": "https://raw.githubusercontent.com/Life-Experimentalist/Youtube-Keystrokes-Blocker/main/disable-yt-hotkeys.user.js",
+        "download": "https://raw.githubusercontent.com/Life-Experimentalist/Youtube-Keystrokes-Blocker/main/disable-yt-hotkeys.user.js"
+    },
+    "features": [
+        "Fine-grained hotkey control",
+        "Individual toggles for each hotkey",
+        "Smart text detection",
+        "Settings modal in YouTube player",
+        "Persistent local storage",
+        "Beautiful dark UI",
+        "Smooth animations",
+        "No performance impact"
+    ],
+    "supported_hotkeys": [
+        {
+            "name": "Number Keys",
+            "keys": "0-9",
+            "function": "Jump to timeline percentage",
+            "blocking": "enabled by default"
+        },
+        {
+            "name": "Spacebar",
+            "keys": "Space",
+            "function": "Play/Pause",
+            "blocking": "disabled by default"
+        },
+        {
+            "name": "Arrow Keys",
+            "keys": "↑ ↓ ← →",
+            "function": "Navigation",
+            "blocking": "disabled by default"
+        },
+        {
+            "name": "Ctrl+Left",
+            "keys": "Ctrl+←",
+            "function": "Previous chapter",
+            "blocking": "enabled by default"
+        },
+        {
+            "name": "Ctrl+Right",
+            "keys": "Ctrl+→",
+            "function": "Next chapter",
+            "blocking": "enabled by default"
+        },
+        {
+            "name": "F Key",
+            "keys": "F",
+            "function": "Fullscreen",
+            "blocking": "disabled by default"
+        },
+        {
+            "name": "M Key",
+            "keys": "M",
+            "function": "Mute/Unmute",
+            "blocking": "enabled by default"
+        },
+        {
+            "name": "Speed Control",
+            "keys": "Shift+< >",
+            "function": "Playback speed",
+            "blocking": "disabled by default"
+        },
+        {
+            "name": "Frame Skip",
+            "keys": ". ,",
+            "function": "Frame-by-frame navigation",
+            "blocking": "disabled by default"
+        }
+    ],
+    "browsers": {
+        "chrome": {
+            "minimum_version": "90",
+            "supported": true,
+            "manager": "Tampermonkey"
+        },
+        "firefox": {
+            "minimum_version": "88",
+            "supported": true,
+            "manager": [
+                "Tampermonkey",
+                "Greasemonkey",
+                "Violentmonkey"
+            ]
+        },
+        "edge": {
+            "minimum_version": "90",
+            "supported": true,
+            "manager": "Tampermonkey"
+        },
+        "safari": {
+            "minimum_version": "14",
+            "supported": true,
+            "manager": "Tampermonkey"
+        }
+    },
+    "permissions": [
+        "access youtube.com",
+        "storage (localStorage)",
+        "DOM manipulation"
+    ],
+    "installation": {
+        "methods": [
+            "One-click install from website",
+            "Manual script installation",
+            "Copy-paste into userscript manager"
+        ],
+        "managers": [
+            {
+                "name": "Tampermonkey",
+                "url": "https://www.tampermonkey.net/",
+                "recommended": true
+            },
+            {
+                "name": "Greasemonkey",
+                "url": "https://www.greasespot.net/"
+            },
+            {
+                "name": "Violentmonkey",
+                "url": "https://violentmonkey.github.io/"
+            }
+        ]
+    },
+    "statistics": {
+        "lines_of_code": 291,
+        "css_lines": 42,
+        "documentation_files": 6,
+        "size_minified": "~12KB",
+        "size_with_docs": "~150KB"
+    },
+    "development": {
+        "language": "JavaScript",
+        "type": "Userscript",
+        "framework": "Vanilla JavaScript",
+        "dependencies": 0,
+        "last_update": "2026-01-19",
+        "development_status": "Active"
+    },
+    "license": {
+        "type": "Apache-2.0",
+        "url": "https://opensource.org/licenses/Apache-2.0",
+        "copyright": "2024-2026 VKrishna04"
+    },
+    "changelog": "https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker/blob/main/CHANGELOG.md",
+    "version_history": [
+        {
+            "version": "2.0",
+            "date": "2026-01-19",
+            "status": "latest",
+            "highlights": [
+                "Modern settings modal",
+                "Fine-grained hotkey control",
+                "Beautiful UI",
+                "Comprehensive documentation"
+            ]
+        },
+        {
+            "version": "1.0",
+            "date": "2025-12-15",
+            "status": "archived",
+            "highlights": [
+                "Initial release"
+            ]
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker/issues",
+        "discussions": "https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker/discussions",
+        "response_time": "Usually within 48 hours"
+    },
+    "social": {
+        "github": "https://github.com/VKrishna04",
+        "github_org": "https://github.com/Life-Experimentalist",
+        "website": "https://vkrishna04.me"
+    },
+    "seo": {
+        "keywords": [
+            "youtube",
+            "hotkeys",
+            "keyboard shortcuts",
+            "userscript",
+            "tampermonkey",
+            "productivity",
+            "browser extension"
+        ],
+        "tags": [
+            "youtube",
+            "keyboard",
+            "hotkeys",
+            "productivity"
+        ]
+    }
+}

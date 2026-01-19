@@ -1,0 +1,1041 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="YouTube Keystrokes Blocker - Take control of YouTube keyboard shortcuts with fine-grained settings."
+    />
+    <meta name="theme-color" content="#ff0000" />
+    <meta property="og:title" content="YouTube Keystrokes Blocker" />
+    <meta
+      property="og:description"
+      content="Block distracting YouTube hotkeys while keeping the ones you need."
+    />
+    <meta
+      property="og:image"
+      content="https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker/raw/main/assets/preview.png"
+    />
+    <meta
+      property="og:url"
+      content="https://Life-Experimentalist.github.io/Youtube-Keystrokes-Blocker/"
+    />
+    <title>YouTube Keystrokes Blocker - Control YouTube Hotkeys</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --primary: #ff0000;
+        --primary-dark: #cc0000;
+        --primary-light: #ff3333;
+        --text-light: #f5f5f5;
+        --text-dark: #181818;
+        --bg-dark: #030303;
+        --bg-card: #1a1a1a;
+        --bg-secondary: #272727;
+        --accent: #3ea6ff;
+        --success: #34a853;
+        --warning: #fbbc04;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial, sans-serif;
+        background: linear-gradient(135deg, var(--bg-dark) 0%, #1a0000 100%);
+        color: var(--text-light);
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      /* Navigation */
+      nav {
+        position: sticky;
+        top: 0;
+        background: rgba(3, 3, 3, 0.95);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--bg-secondary);
+        z-index: 1000;
+        padding: 1rem 0;
+      }
+
+      .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: var(--primary);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+      }
+
+      .nav-links a {
+        color: var(--text-light);
+        text-decoration: none;
+        transition: color 0.3s;
+        font-weight: 500;
+      }
+
+      .nav-links a:hover {
+        color: var(--primary);
+      }
+
+      /* Hero Section */
+      .hero {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 6rem 2rem;
+        text-align: center;
+      }
+
+      .hero h1 {
+        font-size: clamp(2.5rem, 5vw, 4rem);
+        margin-bottom: 1.5rem;
+        background: linear-gradient(
+          135deg,
+          var(--primary) 0%,
+          var(--primary-light) 100%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        font-weight: 900;
+      }
+
+      .hero p {
+        font-size: 1.25rem;
+        color: #b0b0b0;
+        margin-bottom: 2.5rem;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .cta-buttons {
+        display: flex;
+        gap: 1.5rem;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-bottom: 4rem;
+      }
+
+      .btn {
+        padding: 0.875rem 2rem;
+        border-radius: 8px;
+        border: none;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .btn-primary {
+        background: linear-gradient(
+          135deg,
+          var(--primary) 0%,
+          var(--primary-dark) 100%
+        );
+        color: white;
+        box-shadow: 0 8px 20px rgba(255, 0, 0, 0.3);
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 28px rgba(255, 0, 0, 0.4);
+      }
+
+      .btn-secondary {
+        background: var(--bg-secondary);
+        color: var(--text-light);
+        border: 2px solid var(--primary);
+      }
+
+      .btn-secondary:hover {
+        background: var(--primary);
+        color: white;
+        transform: translateY(-2px);
+      }
+
+      /* Features Grid */
+      .features {
+        max-width: 1200px;
+        margin: 5rem auto;
+        padding: 0 2rem;
+      }
+
+      .section-title {
+        font-size: 2.5rem;
+        text-align: center;
+        margin-bottom: 3rem;
+        color: var(--text-light);
+      }
+
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-bottom: 4rem;
+      }
+
+      .feature-card {
+        background: var(--bg-card);
+        border: 1px solid var(--bg-secondary);
+        border-radius: 12px;
+        padding: 2rem;
+        transition: all 0.3s;
+        cursor: pointer;
+      }
+
+      .feature-card:hover {
+        border-color: var(--primary);
+        transform: translateY(-4px);
+        box-shadow: 0 12px 24px rgba(255, 0, 0, 0.1);
+      }
+
+      .feature-icon {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .feature-card h3 {
+        font-size: 1.3rem;
+        margin-bottom: 0.5rem;
+        color: var(--primary);
+      }
+
+      .feature-card p {
+        color: #b0b0b0;
+        font-size: 0.95rem;
+      }
+
+      /* Hotkeys Section */
+      .hotkeys-section {
+        max-width: 1200px;
+        margin: 5rem auto;
+        padding: 0 2rem;
+      }
+
+      .hotkeys-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 4rem;
+      }
+
+      .hotkey-item {
+        background: var(--bg-card);
+        border: 1px solid var(--bg-secondary);
+        border-radius: 8px;
+        padding: 1.5rem;
+        transition: all 0.3s;
+      }
+
+      .hotkey-item:hover {
+        border-color: var(--accent);
+      }
+
+      .hotkey-key {
+        background: linear-gradient(135deg, var(--accent) 0%, #2a7fc0 100%);
+        color: white;
+        padding: 0.75rem 1.25rem;
+        border-radius: 6px;
+        font-weight: 700;
+        display: inline-block;
+        margin-bottom: 0.5rem;
+        font-family: "Courier New", monospace;
+      }
+
+      .hotkey-desc {
+        color: #b0b0b0;
+        font-size: 0.9rem;
+        margin-top: 0.5rem;
+      }
+
+      /* Settings Demo */
+      .settings-demo {
+        max-width: 600px;
+        margin: 5rem auto;
+        padding: 0 2rem;
+      }
+
+      .demo-modal {
+        background: var(--bg-card);
+        border: 1px solid var(--bg-secondary);
+        border-radius: 12px;
+        padding: 2rem;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+      }
+
+      .demo-header {
+        font-size: 1.3rem;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+        padding-bottom: 1rem;
+        border-bottom: 2px solid var(--primary);
+      }
+
+      .demo-setting {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 0;
+        border-bottom: 1px solid var(--bg-secondary);
+      }
+
+      .demo-setting:last-child {
+        border-bottom: none;
+      }
+
+      .demo-label {
+        font-weight: 500;
+        color: var(--text-light);
+      }
+
+      .toggle {
+        position: relative;
+        width: 50px;
+        height: 28px;
+        background: #555;
+        border-radius: 28px;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+
+      .toggle.active {
+        background: var(--primary);
+      }
+
+      .toggle-knob {
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        width: 24px;
+        height: 24px;
+        background: white;
+        border-radius: 50%;
+        transition: left 0.3s;
+      }
+
+      .toggle.active .toggle-knob {
+        left: 24px;
+      }
+
+      /* Installation Section */
+      .installation {
+        max-width: 1200px;
+        margin: 5rem auto;
+        padding: 4rem 2rem;
+        background: linear-gradient(
+          135deg,
+          var(--bg-secondary) 0%,
+          rgba(255, 0, 0, 0.05) 100%
+        );
+        border-radius: 12px;
+      }
+
+      .steps {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+
+      .step {
+        text-align: center;
+      }
+
+      .step-number {
+        background: linear-gradient(
+          135deg,
+          var(--primary) 0%,
+          var(--primary-dark) 100%
+        );
+        color: white;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin: 0 auto 1rem;
+      }
+
+      .step h3 {
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .step p {
+        color: #b0b0b0;
+        font-size: 0.9rem;
+      }
+
+      /* Browser Support */
+      .browser-support {
+        max-width: 1200px;
+        margin: 4rem auto;
+        padding: 0 2rem;
+        text-align: center;
+      }
+
+      .browsers {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        flex-wrap: wrap;
+        margin-top: 2rem;
+      }
+
+      .browser {
+        text-align: center;
+      }
+
+      .browser-icon {
+        font-size: 3rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .browser-name {
+        font-weight: 600;
+        color: var(--text-light);
+      }
+
+      /* FAQ Section */
+      .faq {
+        max-width: 800px;
+        margin: 5rem auto;
+        padding: 0 2rem;
+      }
+
+      .faq-item {
+        background: var(--bg-card);
+        border: 1px solid var(--bg-secondary);
+        border-radius: 8px;
+        margin-bottom: 1rem;
+        overflow: hidden;
+      }
+
+      .faq-question {
+        padding: 1.5rem;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: 600;
+        transition: background 0.3s;
+        user-select: none;
+      }
+
+      .faq-question:hover {
+        background: var(--bg-secondary);
+      }
+
+      .faq-toggle {
+        font-size: 1.5rem;
+        transition: transform 0.3s;
+      }
+
+      .faq-item.active .faq-toggle {
+        transform: rotate(180deg);
+      }
+
+      .faq-answer {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s;
+        background: var(--bg-secondary);
+      }
+
+      .faq-item.active .faq-answer {
+        max-height: 500px;
+      }
+
+      .faq-content {
+        padding: 1.5rem;
+        color: #b0b0b0;
+      }
+
+      /* Footer */
+      footer {
+        background: var(--bg-secondary);
+        border-top: 1px solid var(--bg-secondary);
+        padding: 3rem 2rem;
+        margin-top: 5rem;
+        text-align: center;
+      }
+
+      .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .footer-links {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin-bottom: 1.5rem;
+        flex-wrap: wrap;
+      }
+
+      .footer-links a {
+        color: var(--accent);
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+
+      .footer-links a:hover {
+        color: var(--primary);
+      }
+
+      .footer-text {
+        color: #808080;
+        font-size: 0.9rem;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .nav-links {
+          gap: 1rem;
+          font-size: 0.9rem;
+        }
+
+        .cta-buttons {
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        .btn {
+          justify-content: center;
+        }
+
+        .features-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .hotkeys-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .hero {
+          padding: 3rem 2rem;
+        }
+      }
+
+      /* Animations */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .hero,
+      .features,
+      .hotkeys-section,
+      .installation {
+        animation: fadeInUp 0.8s ease-out;
+      }
+
+      /* Smooth scroll for links */
+      a {
+        transition: all 0.3s;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav>
+      <div class="nav-container">
+        <div class="logo">⌨️ YT Keystrokes Blocker</div>
+        <ul class="nav-links">
+          <li><a href="#features">Features</a></li>
+          <li><a href="#hotkeys">Hotkeys</a></li>
+          <li><a href="#install">Install</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li>
+            <a
+              href="https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker"
+              target="_blank"
+              >GitHub</a
+            >
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <h1>Take Control of YouTube Hotkeys</h1>
+      <p>
+        Stop accidental keyboard shortcuts. Block distracting hotkeys while
+        keeping the ones you need with fine-grained control.
+      </p>
+      <div class="cta-buttons">
+        <a
+          href="https://raw.githubusercontent.com/Life-Experimentalist/Youtube-Keystrokes-Blocker/main/disable-yt-hotkeys.user.js"
+          class="btn btn-primary"
+        >
+          📥 Install Now
+        </a>
+        <a
+          href="https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker"
+          class="btn btn-secondary"
+          target="_blank"
+        >
+          ⭐ View on GitHub
+        </a>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+      <h2 class="section-title">Why You'll Love It</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">⚙️</div>
+          <h3>Fine-Grained Control</h3>
+          <p>
+            Individually toggle each hotkey. Enable only what you need, disable
+            everything else.
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🎯</div>
+          <h3>Smart Detection</h3>
+          <p>
+            Won't block keys while you're typing in search, comments, or chat.
+            Intelligent input detection.
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">💾</div>
+          <h3>Persistent Settings</h3>
+          <p>
+            Your preferences are saved locally. No accounts, no cloud storage,
+            no privacy concerns.
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🎨</div>
+          <h3>Beautiful UI</h3>
+          <p>
+            Modern settings modal integrated seamlessly into YouTube's player
+            interface.
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">⚡</div>
+          <h3>Zero Performance Impact</h3>
+          <p>
+            Lightweight and optimized. Minimal memory footprint. Lightning-fast
+            response.
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔄</div>
+          <h3>Auto-Updated</h3>
+          <p>
+            Stays current with the latest improvements. Your userscript manager
+            handles updates.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Hotkeys Section -->
+    <section id="hotkeys" class="hotkeys-section">
+      <h2 class="section-title">Available Hotkeys</h2>
+      <div class="hotkeys-grid">
+        <div class="hotkey-item">
+          <div class="hotkey-key">0 - 9</div>
+          <p>Numbers</p>
+          <p class="hotkey-desc">Jump to timeline percentage</p>
+        </div>
+        <div class="hotkey-item">
+          <div class="hotkey-key">SPACE</div>
+          <p>Spacebar</p>
+          <p class="hotkey-desc">Play/Pause</p>
+        </div>
+        <div class="hotkey-item">
+          <div class="hotkey-key">↑ ↓ ← →</div>
+          <p>Arrow Keys</p>
+          <p class="hotkey-desc">Navigation in comments/timeline</p>
+        </div>
+        <div class="hotkey-item">
+          <div class="hotkey-key">CTRL + ←</div>
+          <p>Control + Left</p>
+          <p class="hotkey-desc">Previous chapter</p>
+        </div>
+        <div class="hotkey-item">
+          <div class="hotkey-key">CTRL + →</div>
+          <p>Control + Right</p>
+          <p class="hotkey-desc">Next chapter</p>
+        </div>
+        <div class="hotkey-item">
+          <div class="hotkey-key">F</div>
+          <p>F Key</p>
+          <p class="hotkey-desc">Fullscreen toggle</p>
+        </div>
+        <div class="hotkey-item">
+          <div class="hotkey-key">M</div>
+          <p>M Key</p>
+          <p class="hotkey-desc">Mute/Unmute</p>
+        </div>
+        <div class="hotkey-item">
+          <div class="hotkey-key">SHIFT + < or ></div>
+          <p>Shift + Less/Greater</p>
+          <p class="hotkey-desc">Playback speed control</p>
+        </div>
+        <div class="hotkey-item">
+          <div class="hotkey-key">. ,</div>
+          <p>Period/Comma</p>
+          <p class="hotkey-desc">Frame-by-frame navigation</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Settings Demo -->
+    <section class="settings-demo">
+      <h2 class="section-title">Live Settings Demo</h2>
+      <div class="demo-modal">
+        <div class="demo-header">⌨️ Hotkey Settings</div>
+        <div class="demo-setting">
+          <span class="demo-label">Disable Numbers (0–9)</span>
+          <div class="toggle active" onclick="this.classList.toggle('active')">
+            <div class="toggle-knob"></div>
+          </div>
+        </div>
+        <div class="demo-setting">
+          <span class="demo-label">Disable Spacebar</span>
+          <div class="toggle" onclick="this.classList.toggle('active')">
+            <div class="toggle-knob"></div>
+          </div>
+        </div>
+        <div class="demo-setting">
+          <span class="demo-label">Disable Arrow Keys</span>
+          <div class="toggle" onclick="this.classList.toggle('active')">
+            <div class="toggle-knob"></div>
+          </div>
+        </div>
+        <div class="demo-setting">
+          <span class="demo-label">Disable Ctrl + Left</span>
+          <div class="toggle active" onclick="this.classList.toggle('active')">
+            <div class="toggle-knob"></div>
+          </div>
+        </div>
+        <div class="demo-setting">
+          <span class="demo-label">Disable Ctrl + Right</span>
+          <div class="toggle active" onclick="this.classList.toggle('active')">
+            <div class="toggle-knob"></div>
+          </div>
+        </div>
+        <div class="demo-setting">
+          <span class="demo-label">Disable "F" (Fullscreen)</span>
+          <div class="toggle" onclick="this.classList.toggle('active')">
+            <div class="toggle-knob"></div>
+          </div>
+        </div>
+        <div class="demo-setting">
+          <span class="demo-label">Disable "M" (Mute)</span>
+          <div class="toggle active" onclick="this.classList.toggle('active')">
+            <div class="toggle-knob"></div>
+          </div>
+        </div>
+        <div class="demo-setting">
+          <span class="demo-label">Disable Speed (Shift+<>)</span>
+          <div class="toggle" onclick="this.classList.toggle('active')">
+            <div class="toggle-knob"></div>
+          </div>
+        </div>
+        <div class="demo-setting">
+          <span class="demo-label">Disable Frame Skip (./,)</span>
+          <div class="toggle" onclick="this.classList.toggle('active')">
+            <div class="toggle-knob"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Installation Section -->
+    <section id="install" class="installation">
+      <h2 class="section-title">Quick Installation</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-number">1</div>
+          <h3>Install Manager</h3>
+          <p>
+            Get Tampermonkey, Greasemonkey, or Violentmonkey from your browser's
+            extension store
+          </p>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <h3>Click Install</h3>
+          <p>
+            Click the install button on this page to add the script to your
+            manager
+          </p>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <h3>Go to YouTube</h3>
+          <p>
+            Visit youtube.com and look for the keyboard icon in the player
+            controls
+          </p>
+        </div>
+        <div class="step">
+          <div class="step-number">4</div>
+          <h3>Configure</h3>
+          <p>Click the icon to open settings and customize your hotkeys</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Browser Support -->
+    <section class="browser-support">
+      <h2 class="section-title">Supported Browsers</h2>
+      <div class="browsers">
+        <div class="browser">
+          <div class="browser-icon">🌐</div>
+          <div class="browser-name">Chrome</div>
+        </div>
+        <div class="browser">
+          <div class="browser-icon">🦊</div>
+          <div class="browser-name">Firefox</div>
+        </div>
+        <div class="browser">
+          <div class="browser-icon">⚡</div>
+          <div class="browser-name">Edge</div>
+        </div>
+        <div class="browser">
+          <div class="browser-icon">🧭</div>
+          <div class="browser-name">Safari</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="faq">
+      <h2 class="section-title">Frequently Asked Questions</h2>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>What's a userscript?</span>
+          <span class="faq-toggle">▼</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-content">
+            A userscript is a small JavaScript program that runs on websites to
+            customize their behavior. Think of it as a lightweight browser
+            extension. You need a userscript manager (like Tampermonkey) to run
+            them.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>Is this safe?</span>
+          <span class="faq-toggle">▼</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-content">
+            Absolutely! The script is open-source on GitHub, so anyone can
+            review the code. It only modifies YouTube's behavior on your machine
+            and doesn't send any data anywhere. All settings are stored locally
+            in your browser.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>Will this work with dark mode?</span>
+          <span class="faq-toggle">▼</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-content">
+            Yes! The settings modal is designed to match YouTube's dark
+            interface perfectly. It works seamlessly whether YouTube is in light
+            or dark mode.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>Can I use this on mobile?</span>
+          <span class="faq-toggle">▼</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-content">
+            Most mobile browsers don't support userscript managers yet. However,
+            you can use it on mobile browsers like Firefox for Android which has
+            userscript support through Tampermonkey.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>My settings disappeared!</span>
+          <span class="faq-toggle">▼</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-content">
+            Settings are stored in your browser's local storage. If you clear
+            your browser data or cookies, settings may be lost. Try disabling
+            any privacy/tracking prevention settings for YouTube.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>Can I contribute or report bugs?</span>
+          <span class="faq-toggle">▼</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-content">
+            Absolutely! Visit the
+            <a
+              href="https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker/issues"
+              target="_blank"
+              >GitHub Issues page</a
+            >
+            to report bugs or suggest features. Pull requests are welcome!
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>How often is it updated?</span>
+          <span class="faq-toggle">▼</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-content">
+            The script is actively maintained. Updates are released when bugs
+            are fixed or new features are added. Your userscript manager will
+            automatically check for updates.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-content">
+        <div class="footer-links">
+          <a
+            href="https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker"
+            target="_blank"
+            >GitHub</a
+          >
+          <a
+            href="https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker/issues"
+            target="_blank"
+            >Issues</a
+          >
+          <a href="https://github.com/VKrishna04" target="_blank">Author</a>
+          <a href="https://vkrishna04.me" target="_blank">Website</a>
+        </div>
+        <p class="footer-text">
+          Made with ❤️ by
+          <a
+            href="https://github.com/VKrishna04"
+            target="_blank"
+            style="color: var(--primary)"
+            >VKrishna04</a
+          >
+          | Part of
+          <a
+            href="https://github.com/Life-Experimentalist"
+            target="_blank"
+            style="color: var(--primary)"
+            >Life Experimentalist</a
+          >
+        </p>
+        <p class="footer-text">
+          Licensed under Apache 2.0 | © 2024-2026 All rights reserved
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      // FAQ Toggle functionality
+      document.querySelectorAll(".faq-question").forEach((question) => {
+        question.addEventListener("click", function () {
+          const item = this.parentElement;
+          item.classList.toggle("active");
+        });
+      });
+
+      // Smooth scroll for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          const href = this.getAttribute("href");
+          if (href !== "#") {
+            e.preventDefault();
+            const target = document.querySelector(href);
+            if (target) {
+              target.scrollIntoView({ behavior: "smooth" });
+            }
+          }
+        });
+      });
+
+      // Add scroll animation
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -100px 0px",
+      };
+
+      const observer = new IntersectionObserver(function (entries) {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = "1";
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll(".feature-card, .hotkey-item").forEach((el) => {
+        observer.observe(el);
+      });
+    </script>
+  </body>
+</html>
