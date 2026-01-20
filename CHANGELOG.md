@@ -7,7 +7,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## [4.1]() - 2026-01-19
+## [4.2](./docs/RELEASE_NOTES_v4.2.md) - 2026-01-20
+
+### Changed
+- Increased modal text font sizes for better readability
+  - Header title: 16px → 18px
+  - Close button: 24px → 28px
+  - Row labels: now 15px (was inheriting default)
+  - Save button: 14px → 15px
+- Enhanced save button styling
+  - Border radius: 2px → 8px (more rounded corners)
+  - Padding increased: 8px 16px → 10px 18px
+- Removed fixed height constraint on modal content
+  - Eliminated scrollbar in favor of flexible height
+  - Modal now automatically expands to fit all options
+
+### Improved
+- Better visual hierarchy with larger, clearer text
+- Smoother button aesthetics with rounded corners
+- More accessible interface with increased font sizes
+- Cleaner modal appearance without scrollbars
+
+---
+
+## [4.1](./docs/RELEASE_NOTES_v4.1.md) - 2026-01-19
 
 ### Added
 - Official Greasy Fork distribution channel (Script ID: 563265)
@@ -153,7 +176,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **Major (X.0)** - Breaking changes, significant features, major rewrites
 - **Minor (0.Y)** - New features, improvements, non-breaking changes
-- **Patch (0.0.Z)** - Bug fixes, documentation updates, minor improvements
 
 ---
 

@@ -2,7 +2,7 @@
 
 A powerful userscript that gives you fine-grained control over YouTube keyboard shortcuts. Block distracting hotkeys while keeping the ones you need active.
 
-[![Greasy Fork](https://img.shields.io/badge/Greasy%20Fork-563265-FF0000?style=flat-square&logo=tampermonkey&logoColor=white)](https://greasyfork.org/en/scripts/563265-disable-youtube-hotkeys-with-modern-settings-page) ![Version](https://img.shields.io/badge/version-4.1-brightgreen?style=flat-square) ![License](https://img.shields.io/badge/license-Apache%202.0-blue?style=flat-square) ![Platform](https://img.shields.io/badge/platform-Browser%20Userscript-orange?style=flat-square) ![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-yellow?style=flat-square) ![Size](https://img.shields.io/badge/size-~13KB-blue?style=flat-square)
+[![Greasy Fork](https://img.shields.io/badge/Greasy%20Fork-563265-FF0000?style=flat-square&logo=tampermonkey&logoColor=white)](https://greasyfork.org/en/scripts/563265-disable-youtube-hotkeys-with-modern-settings-page) ![Version](https://img.shields.io/badge/version-4.2-brightgreen?style=flat-square) ![License](https://img.shields.io/badge/license-Apache%202.0-blue?style=flat-square) ![Platform](https://img.shields.io/badge/platform-Browser%20Userscript-orange?style=flat-square) ![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-yellow?style=flat-square) ![Size](https://img.shields.io/badge/size-~13KB-blue?style=flat-square)
 
 ## 📌 Features
 
