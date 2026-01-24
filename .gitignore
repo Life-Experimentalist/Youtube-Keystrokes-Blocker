@@ -27,6 +27,7 @@ build/
 *.tmp
 *.temp
 .cache/
+.release-temp/
 
 # OS specific
 .DS_Store

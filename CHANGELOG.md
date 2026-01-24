@@ -7,15 +7,59 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## [4.4] - 2026-01-24
+## [4.5](./docs/Release%20Notes/RELEASE_NOTES_v4.5.md) - 2026-01-25
 
 ### Added
-- **[Timing Fix]** Improved button injection reliability on first page load
-- **[Events]** Added proper YouTube SPA navigation event listeners (`yt-navigate-finish`, `yt-page-data-updated`)
-- **[Retry Logic]** Implemented exponential backoff for DOM element detection
-- **[Automation]** Created PowerShell scripts for automated version management
-- **[CI/CD]** Added GitHub Actions workflow for validation
-- **[Package Management]** Added package.json with npm/uv script shortcuts
+- **`Playback Controls`** Added toggles for all major playback hotkeys: Play/Pause (k), Rewind (j), Fast Forward (l), Previous Video (Shift+p), Next Video (Shift+n)
+- **`Advanced Hotkeys`** Comprehensive controls for subtitle/caption features: Captions (c), Text Opacity (o), Window Opacity (w), Font Size +/- (+/-)
+- **`Spherical Video Controls`** Full support for panoramic video gestures: Pan Up/Down/Left/Right (w/s/a/d), Zoom In/Out (+ on numpad or `]`, - on numpad or `[`)
+- **`UI/Playback Modes`** New toggles for Theatre Mode (t), Miniplayer (i), Keyboard Shortcuts window (Shift+/)
+- **`Expandable Settings`** "Show more controls" section with scrollable content area to prevent modal overflow
+- **`Independent Arrow Control`** Split arrow key controls into Left/Right and Up/Down for granular blocking while preserving Ctrl+Arrow combinations
+- **`Keyboard Shortcuts Button`** Direct access to YouTube's keyboard shortcuts help dialog from settings modal (works even when Shift+/ is disabled)
+- **`Spacebar Fix`** Strengthened spacebar detection with multiple event types (keydown/keypress/keyup) and multiple key identifiers
+
+### Changed
+- Modal width increased to 420px to accommodate more settings without scrolling
+- Default settings now include all 30+ supported hotkeys with independent toggles
+- V key (Captions toggle) now has its own control separate from other features
+- Settings seeded from fresh values on modal open (prevents stale checkboxes)
+- Reset to Defaults now properly updates all toggles including advanced section
+
+### Fixed
+- **`Critical`** Spacebar blocking now works reliably across all keyboard events
+- **`Critical`** Settings persist correctly after save and modal reopen
+- **`Critical`** F/M key and all other single-key shortcuts properly gated by their toggle (not always-on)
+- Ctrl+Left/Right now independent from plain Left/Right arrow blocking
+- Modal scrolling prevents content overflow on smaller screens
+- Settings merge with defaults on load to ensure no missing keys
+- Shift+/ keyboard shortcut help window accessible even when disabled
+
+### UI/UX Improvements
+- Cleaner label formatting: brief description + key in parentheses (e.g., "Play/Pause (k)")
+- Better visual hierarchy with scrollable advanced section
+- Reset and Shortcuts buttons now clearly visible in footer
+- Improved button styling with hover feedback
+- Version number displayed in modal header
+
+### Testing & Validation
+- All 30+ hotkeys verified for independent blocking
+- Cross-browser compatibility maintained
+- Settings persistence validated on reopen
+- Modal overflow handled with scrollbar
+- Keyboard event detection tested across keydown/keypress/keyup
+
+---
+
+## [4.4](./docs/Release%20Notes/RELEASE_NOTES_v4.4.md) - 2026-01-24
+
+### Added
+- **`Timing Fix`** Improved button injection reliability on first page load
+- **`Events`** Added proper YouTube SPA navigation event listeners (`yt-navigate-finish`, `yt-page-data-updated`)
+- **`Retry Logic`** Implemented exponential backoff for DOM element detection
+- **`Automation`** Created PowerShell scripts for automated version management
+- **`CI/CD`** Added GitHub Actions workflow for validation
+- **`Package Management`** Added package.json with npm/uv script shortcuts
 
 ### Changed
 - Enhanced initialization logic to wait for specific DOM elements before injection
@@ -24,7 +68,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Improved documentation with automation guides
 
 ### Fixed
-- **[Critical]** Fixed race condition causing button to not appear on first video load
+- **`Critical`** Fixed race condition causing button to not appear on first video load
 - Improved compatibility with YouTube's updated UI structure
 - Button now appears reliably without requiring page refresh
 
@@ -35,15 +79,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## [4.3](./docs/RELEASE_NOTES_v4.3.md) - 2026-01-23
+## [4.3](./docs/Release%20Notes/RELEASE_NOTES_v4.3.md) - 2026-01-23
 
 ### Added
-- **[Settings]** Smart settings reloading with real-time synchronization
-- **[Hotkey Detection]** Enhanced spacebar detection for both `Space` code and `" "` key
-- **[UI Feedback]** Visual confirmation when settings are saved (green "Saved!" button)
-- **[Multi-Selector Injection]** Fallback system for button injection across varying YouTube layouts
-- **[Retry Logic]** Periodic injection attempts with graceful failure handling
-- **[Menu Fallback]** Tampermonkey menu access to settings as backup option
+- **`Settings`** Smart settings reloading with real-time synchronization
+- **`Hotkey Detection`** Enhanced spacebar detection for both `Space` code and `" "` key
+- **`UI Feedback`** Visual confirmation when settings are saved (green "Saved!" button)
+- **`Multi-Selector Injection`** Fallback system for button injection across varying YouTube layouts
+- **`Retry Logic`** Periodic injection attempts with graceful failure handling
+- **`Menu Fallback`** Tampermonkey menu access to settings as backup option
 
 ### Changed
 - Settings now fetched fresh on every keystroke (not cached)
@@ -65,7 +109,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## [4.2](./docs/RELEASE_NOTES_v4.2.md) - 2026-01-20
+## [4.2](./docs/Release%20Notes/RELEASE_NOTES_v4.2.md) - 2026-01-20
 
 ### Changed
 - Increased modal text font sizes for better readability
@@ -88,7 +132,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## [4.1](./docs/RELEASE_NOTES_v4.1.md) - 2026-01-19
+## [4.1](./docs/Release%20Notes/RELEASE_NOTES_v4.1.md) - 2026-01-19
 
 ### Added
 - Official Greasy Fork distribution channel (Script ID: 563265)
@@ -290,11 +334,11 @@ When submitting a PR, please update the changelog:
 
 ## Git Tags
 
-Release tags follow format: `v2.0`, `v1.0`, etc.
+Release tags follow format: `v4.0`, `v4.5`, etc.
 
 To view a specific release:
-```bash
-git checkout tags/v2.0
+```powershell
+git checkout tags/v4.5
 ```
 
 ---

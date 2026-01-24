@@ -4,7 +4,7 @@ Complete release documentation for YouTube Keystrokes Blocker
 
 ## 📋 Latest Release
 
-### [v4.4 - January 24, 2026](./RELEASE_NOTES_v4.4.md) ⭐ **CURRENT**
+### [v4.4 - January 24, 2026](./Release%20Notes/RELEASE_NOTES_v4.4.md) ⭐ **CURRENT**
 
 **Critical bug fix** - Button now appears reliably on first page load without refresh
 
@@ -15,13 +15,13 @@ Complete release documentation for YouTube Keystrokes Blocker
 - ✅ Automated version management scripts
 - ✅ GitHub Actions CI/CD validation
 
-[Read Full Release Notes →](./RELEASE_NOTES_v4.4.md)
+[Read Full Release Notes →](./Release%20Notes/RELEASE_NOTES_v4.4.md)
 
 ---
 
 ## 📚 Previous Releases
 
-### [v4.3 - January 23, 2026](./RELEASE_NOTES_v4.3.md)
+### [v4.3 - January 23, 2026](./Release%20Notes/RELEASE_NOTES_v4.3.md)
 
 **Enhancement release** - Settings management improvements and better hotkey detection
 
@@ -33,11 +33,11 @@ Complete release documentation for YouTube Keystrokes Blocker
 - ✅ Manifest v3.0 support
 - ✅ Updated distribution URLs
 
-[Read Full Release Notes →](./RELEASE_NOTES_v4.3.md)
+[Read Full Release Notes →](./Release%20Notes/RELEASE_NOTES_v4.3.md)
 
 ---
 
-### [v4.2 - January 20, 2026](./RELEASE_NOTES_v4.2.md)
+### [v4.2 - January 20, 2026](./Release%20Notes/RELEASE_NOTES_v4.2.md)
 
 **UI Enhancement** - Improved modal readability and styling
 
@@ -47,15 +47,15 @@ Complete release documentation for YouTube Keystrokes Blocker
 - Removed modal scrollbars
 - Better visual hierarchy
 
-[Read Full Release Notes →](./RELEASE_NOTES_v4.2.md)
+[Read Full Release Notes →](./Release%20Notes/RELEASE_NOTES_v4.2.md)
 
 ---
 
-### [v4.1 - Prior Release](./RELEASE_NOTES_v4.1.md)
+### [v4.1 - Prior Release](./Release%20Notes/RELEASE_NOTES_v4.1.md)
 
 YouTube-native design with Greasy Fork integration
 
-[Read Full Release Notes →](./RELEASE_NOTES_v4.1.md)
+[Read Full Release Notes →](./Release%20Notes/RELEASE_NOTES_v4.1.md)
 
 ---
 
