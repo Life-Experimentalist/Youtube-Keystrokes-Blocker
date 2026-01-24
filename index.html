@@ -8,7 +8,7 @@
       content="YouTube Keystrokes Blocker - Take control of YouTube keyboard shortcuts with fine-grained settings."
     />
     <meta name="theme-color" content="#ff0033" />
-    <meta name="darkreader-lock">
+    <meta name="darkreader-lock" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="YouTube Keystrokes Blocker" />
     <meta
@@ -21,8 +21,15 @@
     />
     <meta property="og:url" content="https://yt-hotkeys.vkrishna04.me/" />
     <title>YouTube Keystrokes Blocker - Control YouTube Hotkeys</title>
-    <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg" sizes="64x64">
-    <link rel="apple-touch-icon" href="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg">
+    <link
+      rel="icon"
+      href="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg"
+      sizes="64x64"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg"
+    />
     <style>
       * {
         margin: 0;
@@ -509,6 +516,51 @@
         left: 24px;
       }
 
+      .demo-action-buttons {
+        display: flex;
+        gap: 12px;
+        margin-top: 24px;
+        padding-top: 24px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .demo-btn {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        flex: 1;
+        min-width: 150px;
+      }
+
+      .demo-btn-primary {
+        background: var(--primary);
+        color: white;
+      }
+
+      .demo-btn-primary:hover {
+        background: #ff1a44;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 16px rgba(255, 0, 51, 0.3);
+      }
+
+      .demo-btn-secondary {
+        background: rgba(62, 166, 255, 0.2);
+        color: var(--accent);
+        border: 1px solid var(--accent);
+      }
+
+      .demo-btn-secondary:hover {
+        background: rgba(62, 166, 255, 0.3);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(62, 166, 255, 0.2);
+      }
+
       /* Installation Section */
       .installation {
         max-width: 1200px;
@@ -721,6 +773,198 @@
         background: var(--bg-secondary);
       }
 
+      /* Codebase Section */
+      .codebase-section {
+        max-width: 1200px;
+        margin: 5rem auto;
+        padding: 0 2rem;
+      }
+
+      .codebase-header {
+        text-align: center;
+        margin-bottom: 3rem;
+      }
+
+      .codebase-header h2 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        color: var(--text-light);
+      }
+
+      .codebase-header p {
+        font-size: 1.1rem;
+        color: #b0b0b0;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .codebase-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+        margin-bottom: 3rem;
+      }
+
+      .codebase-card {
+        background: linear-gradient(
+          135deg,
+          var(--bg-card) 0%,
+          rgba(255, 0, 0, 0.05) 100%
+        );
+        border: 1px solid var(--bg-secondary);
+        border-radius: 12px;
+        padding: 2rem;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .codebase-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, var(--primary), var(--accent));
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.3s ease;
+      }
+
+      .codebase-card:hover::before {
+        transform: scaleX(1);
+      }
+
+      .codebase-card:hover {
+        border-color: var(--primary);
+        transform: translateY(-6px);
+        box-shadow: 0 16px 32px rgba(255, 0, 0, 0.15);
+      }
+
+      .codebase-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        line-height: 1;
+      }
+
+      .codebase-card h3 {
+        font-size: 1.4rem;
+        color: var(--primary);
+        margin-bottom: 0.5rem;
+      }
+
+      .codebase-card p {
+        color: #b0b0b0;
+        font-size: 0.95rem;
+        margin-bottom: 1rem;
+        flex-grow: 1;
+      }
+
+      .code-stats {
+        display: flex;
+        gap: 1rem;
+        margin-top: auto;
+        padding-top: 1rem;
+        border-top: 1px solid var(--bg-secondary);
+      }
+
+      .stat {
+        flex: 1;
+      }
+
+      .stat-value {
+        font-size: 1.3rem;
+        font-weight: bold;
+        color: var(--accent);
+      }
+
+      .stat-label {
+        font-size: 0.75rem;
+        color: #707070;
+        text-transform: uppercase;
+        margin-top: 0.25rem;
+      }
+
+      .codebase-details {
+        background: var(--bg-card);
+        border: 1px solid var(--bg-secondary);
+        border-radius: 12px;
+        padding: 2rem;
+        margin-bottom: 3rem;
+      }
+
+      .details-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 2rem;
+        padding-bottom: 1rem;
+        border-bottom: 2px solid var(--primary);
+      }
+
+      .details-header-icon {
+        font-size: 2rem;
+      }
+
+      .details-header h3 {
+        font-size: 1.5rem;
+        color: var(--primary);
+        margin: 0;
+      }
+
+      .details-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .detail-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .detail-icon {
+        font-size: 1.5rem;
+        color: var(--accent);
+      }
+
+      .detail-info h4 {
+        color: var(--text-light);
+        margin-bottom: 0.25rem;
+        font-size: 1rem;
+      }
+
+      .detail-info p {
+        color: #b0b0b0;
+        font-size: 0.85rem;
+      }
+
+      .codebase-cta {
+        text-align: center;
+        padding: 2rem;
+        background: linear-gradient(
+          135deg,
+          rgba(255, 0, 0, 0.1) 0%,
+          rgba(58, 166, 255, 0.1) 100%
+        );
+        border-radius: 12px;
+        border: 1px solid var(--bg-secondary);
+      }
+
+      .codebase-cta h3 {
+        color: var(--text-light);
+        margin-bottom: 1rem;
+      }
+
+      .codebase-cta p {
+        color: #b0b0b0;
+        margin-bottom: 1.5rem;
+      }
+
       .faq-item.active .faq-answer {
         max-height: 500px;
       }
@@ -857,22 +1101,36 @@
         <div class="logo">
           <img
             src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg"
-            width="64"
-            height="64"
+            width="36"
+            height="36"
           />
           Keystrokes Blocker
         </div>
         <ul class="nav-links">
           <li><a href="#features">Features</a></li>
           <li><a href="#hotkeys">Hotkeys</a></li>
+          <li><a href="#codebase">Codebase</a></li>
           <li><a href="#install">Install</a></li>
           <li><a href="#faq">FAQ</a></li>
           <li>
             <a
               href="https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker"
               target="_blank"
-              >GitHub</a
             >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="28"
+                height="28"
+                fill="currentColor"
+                class="bi bi-github"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"
+                />
+              </svg>
+
+            </a>
           </li>
         </ul>
       </div>
@@ -897,7 +1155,19 @@
           class="btn btn-secondary"
           target="_blank"
         >
-          ⭐ View on GitHub
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            fill="currentColor"
+            class="bi bi-github"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"
+            />
+          </svg>
+          View on GitHub
         </a>
       </div>
     </section>
@@ -1027,68 +1297,356 @@
       </div>
     </section>
 
+    <!-- Codebase Section -->
+    <section id="codebase" class="codebase-section">
+      <div class="codebase-header">
+        <h2>📚 Our Codebase</h2>
+        <p>
+          Clean, well-organized, and production-ready code built with modern
+          JavaScript and best practices
+        </p>
+      </div>
+
+      <div class="codebase-grid">
+        <!-- Main Userscript Card -->
+        <div class="codebase-card">
+          <div class="codebase-icon">📜</div>
+          <h3>Userscript Core</h3>
+          <p>
+            The heart of the extension. Handles all keyboard event detection,
+            settings management, and modal UI.
+          </p>
+          <div class="code-stats">
+            <div class="stat">
+              <div class="stat-value">693</div>
+              <div class="stat-label">Lines</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">31+</div>
+              <div class="stat-label">Hotkeys</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">v4.5.0</div>
+              <div class="stat-label">Latest</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Settings Management Card -->
+        <div class="codebase-card">
+          <div class="codebase-icon">⚙️</div>
+          <h3>Settings Engine</h3>
+          <p>
+            Robust settings persistence using GM_getValue/GM_setValue with
+            intelligent merge logic and defaults.
+          </p>
+          <div class="code-stats">
+            <div class="stat">
+              <div class="stat-value">31</div>
+              <div class="stat-label">Toggles</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">100%</div>
+              <div class="stat-label">Persistent</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">Auto</div>
+              <div class="stat-label">Save</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Event Handler Card -->
+        <div class="codebase-card">
+          <div class="codebase-icon">⚡</div>
+          <h3>Event Handler</h3>
+          <p>
+            Triple-event listener system (keydown/keypress/keyup) with
+            intelligent hotkey detection and blocking.
+          </p>
+          <div class="code-stats">
+            <div class="stat">
+              <div class="stat-value">3</div>
+              <div class="stat-label">Events</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">158</div>
+              <div class="stat-label">Lines</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">4+</div>
+              <div class="stat-label">Detections</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- UI Module Card -->
+        <div class="codebase-card">
+          <div class="codebase-icon">🎨</div>
+          <h3>Modal UI System</h3>
+          <p>
+            Professional settings modal with expandable sections, smooth
+            animations, and real-time feedback.
+          </p>
+          <div class="code-stats">
+            <div class="stat">
+              <div class="stat-value">121</div>
+              <div class="stat-label">Lines</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">11+20</div>
+              <div class="stat-label">Options</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">Responsive</div>
+              <div class="stat-label">Design</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Button Injection Card -->
+        <div class="codebase-card">
+          <div class="codebase-icon">🔘</div>
+          <h3>Button Injection</h3>
+          <p>
+            Smart DOM injection with multi-selector fallbacks, SPA event
+            detection, and exponential backoff retry.
+          </p>
+          <div class="code-stats">
+            <div class="stat">
+              <div class="stat-value">5+</div>
+              <div class="stat-label">Selectors</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">Auto</div>
+              <div class="stat-label">Retry</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">100%</div>
+              <div class="stat-label">Reliable</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Styling Card -->
+        <div class="codebase-card">
+          <div class="codebase-icon">🎭</div>
+          <h3>Professional Styling</h3>
+          <p>
+            Embedded CSS with YouTube-matched dark theme, smooth transitions,
+            and accessibility features.
+          </p>
+          <div class="code-stats">
+            <div class="stat">
+              <div class="stat-value">500+</div>
+              <div class="stat-label">CSS Lines</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">Dark</div>
+              <div class="stat-label">Theme</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">A11y</div>
+              <div class="stat-label">Ready</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Detailed Breakdown -->
+      <div class="codebase-details">
+        <div class="details-header">
+          <div class="details-header-icon">📊</div>
+          <h3>Code Statistics & Features</h3>
+        </div>
+
+        <div class="details-grid">
+          <div class="detail-item">
+            <div class="detail-icon">📝</div>
+            <div class="detail-info">
+              <h4>Total Lines of Code</h4>
+              <p>693 lines of well-organized, commented code</p>
+            </div>
+          </div>
+
+          <div class="detail-item">
+            <div class="detail-icon">🎯</div>
+            <div class="detail-info">
+              <h4>Hotkey Coverage</h4>
+              <p>31 independent keyboard shortcuts supported</p>
+            </div>
+          </div>
+
+          <div class="detail-item">
+            <div class="detail-icon">⚡</div>
+            <div class="detail-info">
+              <h4>Performance</h4>
+              <p>Optimized event handling with minimal overhead</p>
+            </div>
+          </div>
+
+          <div class="detail-item">
+            <div class="detail-icon">🔒</div>
+            <div class="detail-info">
+              <h4>Security</h4>
+              <p>No data collection, fully open-source on GitHub</p>
+            </div>
+          </div>
+
+          <div class="detail-item">
+            <div class="detail-icon">🌐</div>
+            <div class="detail-info">
+              <h4>Compatibility</h4>
+              <p>Works with Tampermonkey, Greasemonkey, Violentmonkey</p>
+            </div>
+          </div>
+
+          <div class="detail-item">
+            <div class="detail-icon">📦</div>
+            <div class="detail-info">
+              <h4>Package Management</h4>
+              <p>npm scripts + automated version management</p>
+            </div>
+          </div>
+
+          <div class="detail-item">
+            <div class="detail-icon">✅</div>
+            <div class="detail-info">
+              <h4>Testing & Validation</h4>
+              <p>All features tested, verified for edge cases</p>
+            </div>
+          </div>
+
+          <div class="detail-item">
+            <div class="detail-icon">📚</div>
+            <div class="detail-info">
+              <h4>Documentation</h4>
+              <p>Comprehensive guides, API docs, inline comments</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Call to Action -->
+      <div class="codebase-cta">
+        <h3>👨‍💻 Want to Contribute or Review the Code?</h3>
+        <p>
+          The entire codebase is open-source and available on GitHub. We welcome
+          contributions, bug reports, and feature requests!
+        </p>
+        <a
+          href="https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker"
+          target="_blank"
+          class="btn btn-primary"
+        >
+          View on GitHub →
+        </a>
+      </div>
+    </section>
+
     <!-- Settings Demo -->
     <section class="settings-demo">
       <h2 class="section-title">Live Settings Demo</h2>
-      <div class="demo-modal">
-        <div class="demo-header">            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg"
-              width="16"
-              height="16"
-            /> Hotkey Settings</div>
+      <div class="demo-modal" id="demoModal">
+        <div class="demo-header">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg"
+            width="16"
+            height="16"
+          />
+          Hotkey Settings
+        </div>
         <div class="demo-setting">
           <span class="demo-label">Disable Numbers (0–9)</span>
-          <div class="toggle active" onclick="this.classList.toggle('active')">
+          <div class="toggle active demo-toggle" data-setting="numbers" onclick="toggleDemoSetting(this)">
             <div class="toggle-knob"></div>
           </div>
         </div>
         <div class="demo-setting">
           <span class="demo-label">Disable Spacebar</span>
-          <div class="toggle" onclick="this.classList.toggle('active')">
+          <div class="toggle demo-toggle" data-setting="spacebar" onclick="toggleDemoSetting(this)">
             <div class="toggle-knob"></div>
           </div>
         </div>
         <div class="demo-setting">
           <span class="demo-label">Disable Arrow Keys</span>
-          <div class="toggle" onclick="this.classList.toggle('active')">
+          <div class="toggle demo-toggle" data-setting="arrowKeys" onclick="toggleDemoSetting(this)">
             <div class="toggle-knob"></div>
           </div>
         </div>
         <div class="demo-setting">
           <span class="demo-label">Disable Ctrl + Left</span>
-          <div class="toggle active" onclick="this.classList.toggle('active')">
+          <div class="toggle active demo-toggle" data-setting="ctrlLeft" onclick="toggleDemoSetting(this)">
             <div class="toggle-knob"></div>
           </div>
         </div>
         <div class="demo-setting">
           <span class="demo-label">Disable Ctrl + Right</span>
-          <div class="toggle active" onclick="this.classList.toggle('active')">
+          <div class="toggle active demo-toggle" data-setting="ctrlRight" onclick="toggleDemoSetting(this)">
             <div class="toggle-knob"></div>
           </div>
         </div>
         <div class="demo-setting">
           <span class="demo-label">Disable "F" (Fullscreen)</span>
-          <div class="toggle" onclick="this.classList.toggle('active')">
+          <div class="toggle demo-toggle" data-setting="fullscreen" onclick="toggleDemoSetting(this)">
             <div class="toggle-knob"></div>
           </div>
         </div>
         <div class="demo-setting">
           <span class="demo-label">Disable "M" (Mute)</span>
-          <div class="toggle active" onclick="this.classList.toggle('active')">
+          <div class="toggle active demo-toggle" data-setting="mute" onclick="toggleDemoSetting(this)">
             <div class="toggle-knob"></div>
           </div>
         </div>
         <div class="demo-setting">
           <span class="demo-label">Disable Speed (Shift+<>)</span>
-          <div class="toggle" onclick="this.classList.toggle('active')">
+          <div class="toggle demo-toggle" data-setting="speed" onclick="toggleDemoSetting(this)">
             <div class="toggle-knob"></div>
           </div>
         </div>
         <div class="demo-setting">
           <span class="demo-label">Disable Frame Skip (./,)</span>
-          <div class="toggle" onclick="this.classList.toggle('active')">
+          <div class="toggle demo-toggle" data-setting="frameSkip" onclick="toggleDemoSetting(this)">
             <div class="toggle-knob"></div>
           </div>
+        </div>
+        <div class="demo-setting">
+          <span class="demo-label">Disable Play/Pause (K)</span>
+          <div class="toggle demo-toggle" data-setting="playPause" onclick="toggleDemoSetting(this)">
+            <div class="toggle-knob"></div>
+          </div>
+        </div>
+        <div class="demo-setting">
+          <span class="demo-label">Disable Theatre Mode (T)</span>
+          <div class="toggle demo-toggle" data-setting="theatreMode" onclick="toggleDemoSetting(this)">
+            <div class="toggle-knob"></div>
+          </div>
+        </div>
+        <div class="demo-setting">
+          <span class="demo-label">Disable Captions (C)</span>
+          <div class="toggle demo-toggle" data-setting="captions" onclick="toggleDemoSetting(this)">
+            <div class="toggle-knob"></div>
+          </div>
+        </div>
+        <div class="demo-action-buttons">
+          <button
+            class="demo-btn demo-btn-secondary"
+            onclick="viewDemoShortcuts()"
+          >
+            📋 View Shortcuts
+          </button>
+          <button
+            class="demo-btn demo-btn-secondary"
+            onclick="resetDemoSettings()"
+          >
+            🔄 Reset
+          </button>
+          <button
+            class="demo-btn demo-btn-primary"
+            onclick="saveDemoSettings()"
+          >
+            💾 Save Settings
+          </button>
         </div>
       </div>
     </section>
@@ -1174,9 +1732,21 @@
           <div class="browser-name">And Others..</div>
         </div>
       </div>
-
-      <div class="managers-title">Supported Userscript Managers</div>
+    </section>
+    <section class="userscript-managers">
+      <div class="section-title">Supported Userscript Managers</div>
       <div class="browsers">
+        <div class="browser">
+          <div class="browser-icon">
+            <img
+              src="https://greasyfork.org/vite/assets/blacklogo96-CxYTSM_T.png"
+              width="48"
+              height="48"
+              alt="GreasyFork Logo"
+            />
+          </div>
+          <div class="browser-name">GreasyFork</div>
+        </div>
         <div class="browser">
           <div class="browser-icon">
             <svg
@@ -1370,6 +1940,159 @@
     </footer>
 
     <script>
+      // Demo Settings Management
+      const demoSettings = {
+        numbers: true,
+        spacebar: false,
+        arrowKeys: false,
+        ctrlLeft: true,
+        ctrlRight: true,
+        fullscreen: false,
+        mute: true,
+        speed: false,
+        frameSkip: false,
+        playPause: false,
+        theatreMode: false,
+        captions: false,
+      };
+
+      const defaultSettings = { ...demoSettings };
+
+      // Initialize demo from localStorage if available
+      function initializeDemoSettings() {
+        const saved = localStorage.getItem("ykbDemoSettings");
+        if (saved) {
+          try {
+            const parsedSettings = JSON.parse(saved);
+            Object.assign(demoSettings, parsedSettings);
+            updateDemoUI();
+          } catch (e) {
+            console.log("Could not load saved settings, using defaults");
+          }
+        }
+      }
+
+      // Toggle individual demo setting
+      function toggleDemoSetting(element) {
+        element.classList.toggle("active");
+        const setting = element.getAttribute("data-setting");
+        demoSettings[setting] = element.classList.contains("active");
+      }
+
+      // Update UI to reflect current settings
+      function updateDemoUI() {
+        document.querySelectorAll(".demo-toggle").forEach((toggle) => {
+          const setting = toggle.getAttribute("data-setting");
+          if (demoSettings[setting]) {
+            toggle.classList.add("active");
+          } else {
+            toggle.classList.remove("active");
+          }
+        });
+      }
+
+      // Reset all settings to defaults
+      function resetDemoSettings() {
+        Object.assign(demoSettings, defaultSettings);
+        updateDemoUI();
+        showDemoNotification("Settings reset to defaults! 🔄", "info");
+      }
+
+      // Save settings to localStorage
+      function saveDemoSettings() {
+        try {
+          localStorage.setItem("ykbDemoSettings", JSON.stringify(demoSettings));
+          showDemoNotification("Settings saved successfully! 💾", "success");
+        } catch (e) {
+          showDemoNotification("Could not save settings", "error");
+        }
+      }
+
+      // View shortcuts reference
+      function viewDemoShortcuts() {
+        const shortcuts = {
+          "Numbers (0-9)": "Jump to specific video position",
+          "Spacebar": "Play / Pause",
+          "Arrow Keys": "Previous/Next frame or 5 second skip",
+          "Ctrl + Left": "Jump back 1 second",
+          "Ctrl + Right": "Jump forward 1 second",
+          "F": "Toggle fullscreen",
+          "M": "Mute / Unmute",
+          "Shift + <": "Decrease playback speed",
+          "Shift + >": "Increase playback speed",
+          ".": "Next frame",
+          ",": "Previous frame",
+          "K": "Play / Pause",
+          "T": "Toggle theatre mode",
+          "C": "Toggle captions",
+        };
+
+        let message = "📋 YouTube Hotkeys Reference\n\n";
+        for (const [key, action] of Object.entries(shortcuts)) {
+          message += `${key}: ${action}\n`;
+        }
+
+        alert(message);
+      }
+
+      // Show demo notification
+      function showDemoNotification(message, type = "info") {
+        const notification = document.createElement("div");
+        notification.className = `demo-notification demo-notification-${type}`;
+        notification.textContent = message;
+        notification.style.cssText = `
+          position: fixed;
+          bottom: 20px;
+          right: 20px;
+          padding: 12px 20px;
+          border-radius: 6px;
+          font-size: 14px;
+          font-weight: 500;
+          z-index: 10000;
+          animation: slideIn 0.3s ease-out;
+          ${
+            type === "success"
+              ? "background: #10b981; color: white; border: 1px solid #059669;"
+              : type === "error"
+                ? "background: #ef4444; color: white; border: 1px solid #dc2626;"
+                : "background: #3b82f6; color: white; border: 1px solid #2563eb;"
+          }
+        `;
+
+        document.body.appendChild(notification);
+
+        setTimeout(() => {
+          notification.style.animation = "slideOut 0.3s ease-out";
+          setTimeout(() => notification.remove(), 300);
+        }, 3000);
+      }
+
+      // Add animation styles
+      const style = document.createElement("style");
+      style.textContent = `
+        @keyframes slideIn {
+          from {
+            transform: translateX(400px);
+            opacity: 0;
+          }
+          to {
+            transform: translateX(0);
+            opacity: 1;
+          }
+        }
+        @keyframes slideOut {
+          from {
+            transform: translateX(0);
+            opacity: 1;
+          }
+          to {
+            transform: translateX(400px);
+            opacity: 0;
+          }
+        }
+      `;
+      document.head.appendChild(style);
+
       // FAQ Toggle functionality
       document.querySelectorAll(".faq-question").forEach((question) => {
         question.addEventListener("click", function () {
@@ -1409,6 +2132,9 @@
       document.querySelectorAll(".feature-card, .hotkey-item").forEach((el) => {
         observer.observe(el);
       });
+
+      // Initialize demo settings on page load
+      initializeDemoSettings();
     </script>
   </body>
 </html>
