@@ -1,7 +1,7 @@
 {
     "manifest_version": "3.0",
     "name": "YouTube Keystrokes Blocker",
-    "version": "4.3",
+    "version": "4.4",
     "description": "Control YouTube keyboard shortcuts with fine-grained settings. Block distracting hotkeys while keeping the ones you need.",
     "metadata": {
         "id": "youtube-keystrokes-blocker",

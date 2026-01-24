@@ -1,0 +1,46 @@
+{
+  "name": "youtube-keystrokes-blocker",
+  "version": "4.4.0",
+  "description": "Control YouTube keyboard shortcuts with fine-grained settings. Block distracting hotkeys while keeping the ones you need.",
+  "main": "disable-yt-hotkeys.user.js",
+  "scripts": {
+    "version:major": "pwsh -NoProfile -ExecutionPolicy Bypass -File ./scripts/Update-Version.ps1 -Type major",
+    "version:minor": "pwsh -NoProfile -ExecutionPolicy Bypass -File ./scripts/Update-Version.ps1 -Type minor",
+    "version:patch": "pwsh -NoProfile -ExecutionPolicy Bypass -File ./scripts/Update-Version.ps1 -Type patch",
+    "version:set": "pwsh -NoProfile -ExecutionPolicy Bypass -File ./scripts/Update-Version.ps1 -NewVersion",
+    "test": "echo \"No tests configured yet\" && exit 0",
+    "lint": "echo \"Linting userscript...\" && exit 0",
+    "build": "echo \"✅ Userscript ready for deployment\" && echo \"📦 File: disable-yt-hotkeys.user.js\"",
+    "release": "pwsh -NoProfile -ExecutionPolicy Bypass -File ./scripts/Release.ps1",
+    "clean": "echo \"🧹 Cleaning temporary files...\" && pwsh -Command \"Remove-Item -Path ./*.tmp -ErrorAction SilentlyContinue\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker.git"
+  },
+  "keywords": [
+    "youtube",
+    "userscript",
+    "tampermonkey",
+    "greasemonkey",
+    "hotkeys",
+    "keyboard-shortcuts",
+    "productivity",
+    "accessibility"
+  ],
+  "author": {
+    "name": "VKrishna04",
+    "email": "hello@vkrishna04.me",
+    "url": "https://vkrishna04.me"
+  },
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker/issues"
+  },
+  "homepage": "https://yt-hotkeys.vkrishna04.me/",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "devDependencies": {},
+  "dependencies": {}
+}

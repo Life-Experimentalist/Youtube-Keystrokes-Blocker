@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Disable YouTube Hotkeys with Modern Settings Page
 // @namespace    https://github.com/VKrishna04
-// @version      4.3
+// @version      4.4
 // @description  Disable various YouTube hotkeys with fine-grained control (Excludes Search/Comments)
 // @author       VKrishna04
 // @match        *://www.youtube.com/*
@@ -14,6 +14,11 @@
 // @compatible   chrome >= 70
 // @compatible   opera >= 57
 // @compatible   edge >= 79
+// @compatible   safari >= 13
+// @compatible   vivaldi >= 2.0
+// @compatible   brave >= 1.0
+// @support      firefox, chrome, opera, edge, safari, vivaldi, brave, tampermonkey, greasemonkey, violentmonkey
+// @run-at       document-idle
 // @license      Apache-2.0
 // @homepageURL  https://yt-hotkeys.vkrishna04.me/
 // @supportURL   https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker/issues
@@ -352,33 +357,105 @@
     actionsContainer.appendChild(wrapper);
   }
 
-  // --- 4. OBSERVER LOGIC ---
-  // Watch for the actions bar appearing (It loads lazily below the video)
+  // --- 4. OBSERVER LOGIC WITH PROPER TIMING ---
+  let injectionAttempts = 0;
+  let isInjecting = false;
+
+  // Improved injection with better timing and waiting for specific elements
+  async function tryInjectWithRetry() {
+    if (isInjecting) return;
+    isInjecting = true;
+
+    // Don't try if button already exists
+    if (document.getElementById("yt-hk-action-btn")) {
+      isInjecting = false;
+      return;
+    }
+
+    // Wait for the video player and actions container to be present
+    const maxAttempts = 20;
+    const baseDelay = 100;
+
+    for (let i = 0; i < maxAttempts; i++) {
+      // Check if we're on a watch page
+      if (!window.location.pathname.startsWith('/watch')) {
+        isInjecting = false;
+        return;
+      }
+
+      // Check if button already exists (another attempt might have succeeded)
+      if (document.getElementById("yt-hk-action-btn")) {
+        isInjecting = false;
+        return;
+      }
+
+      // Look for the video player AND the actions container
+      const videoPlayer = document.querySelector('ytd-watch-flexy') || document.querySelector('#player');
+      const actionsContainer = document.querySelector("ytd-menu-renderer #top-level-buttons-computed") ||
+                               document.querySelector("ytd-menu-renderer #menu-top-level-buttons") ||
+                               document.querySelector("ytd-menu-renderer #flexible-item-buttons");
+
+      if (videoPlayer && actionsContainer) {
+        // Both elements are ready, inject now
+        injectActionButton();
+        isInjecting = false;
+        return;
+      }
+
+      // Exponential backoff: wait longer each attempt
+      const delay = baseDelay * Math.pow(1.3, i);
+      await new Promise(resolve => setTimeout(resolve, delay));
+    }
+
+    isInjecting = false;
+  }
+
+  // Watch for YouTube's SPA navigation events
+  function handlePageChange() {
+    // Reset injection state on navigation
+    injectionAttempts = 0;
+
+    // Try injection after a short delay to let the page render
+    setTimeout(() => tryInjectWithRetry(), 200);
+  }
+
+  // Listen for YouTube's navigation events (SPA)
+  if (window.yt && window.yt.config_) {
+    // YouTube is loaded, set up listeners
+    document.addEventListener('yt-navigate-finish', handlePageChange);
+    document.addEventListener('yt-page-data-updated', handlePageChange);
+  } else {
+    // YouTube not loaded yet, wait for it
+    window.addEventListener('yt-navigate-finish', handlePageChange);
+    window.addEventListener('yt-page-data-updated', handlePageChange);
+  }
+
+  // Backup: MutationObserver to catch when the actions container appears
   const observer = new MutationObserver((mutations) => {
-    if (!document.getElementById("yt-hk-action-btn")) {
-      injectActionButton();
+    // Only observe if on a watch page and button doesn't exist
+    if (window.location.pathname.startsWith('/watch') && !document.getElementById("yt-hk-action-btn")) {
+      tryInjectWithRetry();
     }
   });
 
-  observer.observe(document.body, { childList: true, subtree: true });
+  // Start observing once the body is available
+  if (document.body) {
+    observer.observe(document.body, { childList: true, subtree: true });
+  } else {
+    document.addEventListener('DOMContentLoaded', () => {
+      observer.observe(document.body, { childList: true, subtree: true });
+    });
+  }
 
-  // Aggressive fallback: Try to inject button periodically
-  let injectionAttempts = 0;
-  const injectionInterval = setInterval(() => {
-    if (document.getElementById("yt-hk-action-btn")) {
-      clearInterval(injectionInterval);
-      return;
-    }
-    injectActionButton();
-    injectionAttempts++;
-    if (injectionAttempts > 30) {
-      // Stop trying after 30 attempts (15 seconds)
-      clearInterval(injectionInterval);
-    }
-  }, 500);
-
-  // Try once when page loads
-  setTimeout(() => injectActionButton(), 1000);
+  // Initial injection attempts
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => tryInjectWithRetry(), 500);
+    });
+  } else {
+    // DOM already loaded
+    setTimeout(() => tryInjectWithRetry(), 500);
+  }
 
   // Fallback Tampermonkey Menu
   GM_registerMenuCommand("YouTube Hotkey Settings", openSettings);

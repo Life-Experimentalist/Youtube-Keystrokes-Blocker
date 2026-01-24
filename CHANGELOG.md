@@ -7,6 +7,64 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [4.4] - 2026-01-24
+
+### Added
+- **[Timing Fix]** Improved button injection reliability on first page load
+- **[Events]** Added proper YouTube SPA navigation event listeners (`yt-navigate-finish`, `yt-page-data-updated`)
+- **[Retry Logic]** Implemented exponential backoff for DOM element detection
+- **[Automation]** Created PowerShell scripts for automated version management
+- **[CI/CD]** Added GitHub Actions workflow for validation
+- **[Package Management]** Added package.json with npm/uv script shortcuts
+
+### Changed
+- Enhanced initialization logic to wait for specific DOM elements before injection
+- Better handling of YouTube's dynamic content loading
+- Replaced polling-based injection with event-driven approach
+- Improved documentation with automation guides
+
+### Fixed
+- **[Critical]** Fixed race condition causing button to not appear on first video load
+- Improved compatibility with YouTube's updated UI structure
+- Button now appears reliably without requiring page refresh
+
+### Developer Experience
+- Version updates now automated across all files (userscript, manifest, README)
+- New npm scripts: `version:patch`, `version:minor`, `version:major`, `release`
+- Comprehensive automation documentation in `scripts/README.md`
+
+---
+
+## [4.3](./docs/RELEASE_NOTES_v4.3.md) - 2026-01-23
+
+### Added
+- **[Settings]** Smart settings reloading with real-time synchronization
+- **[Hotkey Detection]** Enhanced spacebar detection for both `Space` code and `" "` key
+- **[UI Feedback]** Visual confirmation when settings are saved (green "Saved!" button)
+- **[Multi-Selector Injection]** Fallback system for button injection across varying YouTube layouts
+- **[Retry Logic]** Periodic injection attempts with graceful failure handling
+- **[Menu Fallback]** Tampermonkey menu access to settings as backup option
+
+### Changed
+- Settings now fetched fresh on every keystroke (not cached)
+- Improved F/M key detection for case-insensitive handling
+- Enhanced button injection with multiple selector strategies
+- Better modal close behavior with 500ms delay for confirmation
+
+### Fixed
+- Settings not persisting correctly on first install (spacebar setting)
+- Inconsistent F/M key detection across keyboard layouts
+- Settings changes requiring page refresh
+- Better compatibility with YouTube's varying DOM structures
+
+### Infrastructure
+- Updated manifest version to 3.0 (modern Chrome extension standard)
+- Added explicit browser compatibility declarations
+- Updated download/update URLs from Greasy Fork to raw GitHub
+- Better distribution and faster update propagation
+
+---
+
 ## [4.2](./docs/RELEASE_NOTES_v4.2.md) - 2026-01-20
 
 ### Changed
