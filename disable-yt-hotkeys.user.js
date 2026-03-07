@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Disable YouTube Hotkeys with Modern Settings Page
 // @namespace    https://github.com/VKrishna04
-// @version      4.5.1
+// @version      4.5.2
 // @description  Disable various YouTube hotkeys with fine-grained control (Excludes Search/Comments)
 // @author       VKrishna04
 // @match        *://www.youtube.com/*
@@ -280,7 +280,7 @@
 
     let closeIcon = document.createElement("div");
     closeIcon.className = "yt-hk-close";
-    closeIcon.textContent = "❌";
+    closeIcon.textContent = "❎";
 
     header.append(titleContainer, closeIcon);
     modal.appendChild(header);
@@ -463,16 +463,26 @@
     // Check if button already exists
     if (document.getElementById("yt-hk-action-btn")) return;
 
-    // Multiple selectors to try - YouTube changes DOM structure frequently
-    const possibleContainers = [
-      document.querySelector("ytd-menu-renderer #top-level-buttons-computed"),
-      document.querySelector("ytd-menu-renderer #menu-top-level-buttons"),
-      document.querySelector("ytd-menu-renderer #flexible-item-buttons"),
-      document.querySelector("ytd-menu-renderer") ? document.querySelector("ytd-menu-renderer").querySelector("div[id*='buttons']") : null,
-      document.querySelector("div[role='region'] [data-content-region]") ? document.querySelector("div[role='region'] [data-content-region]").querySelector("div[id*='buttons']") : null,
-    ].filter(Boolean)[0];
+    // Target the specific header menu by its ID to avoid child panel menus
+    const headerMenu = document.querySelector("#header-menu");
 
-    const actionsContainer = possibleContainers;
+    if (!headerMenu) {
+      // Header menu not found yet, will retry
+      return;
+    }
+
+    // Find the menu-renderer within the header menu
+    const menuRenderer = headerMenu.querySelector("ytd-menu-renderer");
+
+    if (!menuRenderer) {
+      // Menu not found yet, will retry
+      return;
+    }
+
+    // Find the buttons container within this specific menu renderer
+    const actionsContainer = menuRenderer.querySelector("#top-level-buttons-computed") ||
+                             menuRenderer.querySelector("#menu-top-level-buttons") ||
+                             menuRenderer.querySelector("#flexible-item-buttons");
 
     if (!actionsContainer) {
       // Container not found yet, will retry with observer
@@ -521,9 +531,9 @@
 
     wrapper.appendChild(btn);
 
-    // 6. Insert into DOM
-    // Append to the end of the action buttons list
-    actionsContainer.appendChild(wrapper);
+    // 6. Insert into DOM at the beginning of the actions container
+    // This ensures it appears before other buttons
+    actionsContainer.insertBefore(wrapper, actionsContainer.firstChild);
   }
 
   // --- 4. OBSERVER LOGIC WITH PROPER TIMING ---
@@ -543,8 +553,8 @@
     }
 
     // Wait for the video player and actions container to be present
-    const maxAttempts = 40; // Increased from 20
-    const baseDelay = 50; // Reduced from 100 for faster initial checks
+    const maxAttempts = 50; // Increased to handle banner cases
+    const baseDelay = 50;
 
     for (let i = 0; i < maxAttempts; i++) {
       // Check if we're on a watch page
@@ -559,17 +569,22 @@
         return;
       }
 
-      // Look for the video player AND the actions container
-      const videoPlayer = document.querySelector('ytd-watch-flexy') || document.querySelector('#player');
-      const actionsContainer = document.querySelector("ytd-menu-renderer #top-level-buttons-computed") ||
-                               document.querySelector("ytd-menu-renderer #menu-top-level-buttons") ||
-                               document.querySelector("ytd-menu-renderer #flexible-item-buttons");
+      // Look for the header menu and the menu renderer within it
+      const headerMenu = document.querySelector("#header-menu");
+      if (headerMenu) {
+        const menuRenderer = headerMenu.querySelector("ytd-menu-renderer");
+        if (menuRenderer) {
+          const actionsContainer = menuRenderer.querySelector("#top-level-buttons-computed") ||
+                                   menuRenderer.querySelector("#menu-top-level-buttons") ||
+                                   menuRenderer.querySelector("#flexible-item-buttons");
 
-      if (videoPlayer && actionsContainer) {
-        // Both elements are ready, inject now
-        injectActionButton();
-        isInjecting = false;
-        return;
+          if (actionsContainer) {
+            // All elements are ready, inject now
+            injectActionButton();
+            isInjecting = false;
+            return;
+          }
+        }
       }
 
       // Exponential backoff: wait longer each attempt, but slower growth
@@ -637,6 +652,13 @@
         tryInjectWithRetry();
       }
     }, 800);
+
+    // One more attempt for cases with slow-loading banners
+    setTimeout(() => {
+      if (!document.getElementById("yt-hk-action-btn") && !isInjecting && window.location.pathname.startsWith('/watch')) {
+        tryInjectWithRetry();
+      }
+    }, 1500);
   }
 
   if (document.readyState === 'loading') {
