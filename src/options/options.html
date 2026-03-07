@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>YouTube Keystrokes Blocker — Settings</title>
+    <link rel="stylesheet" href="options.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="page-header">
+        <div class="header-inner">
+          <div class="title-row">
+            <svg
+              class="logo"
+              viewBox="0 0 24 24"
+              width="28"
+              height="28"
+              fill="currentColor"
+            >
+              <path
+                d="M20,5H4C2.9,5,2,5.9,2,7v10c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2V7C22,5.9,21.1,5,20,5z M11,8h2v2h-2V8z M11,11h2v2h-2V11z M8,8h2v2H8V8z M8,11h2v2H8V11z M7,13H5v-2h2V13z M7,10H5V8h2V10z M16,17H8v-2h8V17z M16,13h-2v-2h2V13z M16,10h-2V8h2V10z M19,13h-2v-2h2V13z M19,10h-2V8h2V10z"
+              />
+            </svg>
+            <div>
+              <h1>YouTube Keystrokes Blocker</h1>
+              <p class="subtitle">
+                Fine-grained control over YouTube keyboard shortcuts
+              </p>
+            </div>
+          </div>
+          <span class="version" id="version"></span>
+        </div>
+      </header>
+
+      <main class="content">
+        <div class="status-bar" id="status-bar"></div>
+
+        <section class="card">
+          <h2 class="card-title">Basic Controls</h2>
+          <p class="card-desc">
+            Commonly toggled shortcuts. These affect normal video watching.
+          </p>
+          <div class="rows" id="base-rows"></div>
+        </section>
+
+        <section class="card">
+          <h2 class="card-title">Playback &amp; Navigation</h2>
+          <p class="card-desc">
+            Playback speed, frame control, and video navigation shortcuts.
+          </p>
+          <div class="rows" id="playback-rows"></div>
+        </section>
+
+        <section class="card">
+          <h2 class="card-title">Captions &amp; Accessibility</h2>
+          <p class="card-desc">
+            Subtitle, caption display, and accessibility-related shortcuts.
+          </p>
+          <div class="rows" id="captions-rows"></div>
+        </section>
+
+        <section class="card">
+          <h2 class="card-title">View Modes &amp; UI</h2>
+          <p class="card-desc">
+            Fullscreen, theatre mode, miniplayer, and dialog controls.
+          </p>
+          <div class="rows" id="view-rows"></div>
+        </section>
+
+        <section class="card">
+          <h2 class="card-title">Spherical / 360° Video</h2>
+          <p class="card-desc">
+            Pan and zoom controls for 360° and spherical video content.
+          </p>
+          <div class="rows" id="spherical-rows"></div>
+        </section>
+
+        <div class="actions">
+          <button class="btn btn-reset" id="reset-btn">
+            Reset to Defaults
+          </button>
+          <button class="btn btn-save" id="save-btn">Save Settings</button>
+        </div>
+      </main>
+
+      <footer class="page-footer">
+        <span
+          >YouTube Keystrokes Blocker by
+          <a href="https://vkrishna04.me" target="_blank" rel="noopener"
+            >VKrishna04</a
+          >
+          &middot;
+          <a
+            href="https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker"
+            target="_blank"
+            rel="noopener"
+            >GitHub</a
+          >
+          &middot;
+          <a
+            href="https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker/issues"
+            target="_blank"
+            rel="noopener"
+            >Report Issue</a
+          >
+        </span>
+      </footer>
+    </div>
+
+    <script src="options.js"></script>
+  </body>
+</html>

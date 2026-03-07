@@ -17,19 +17,12 @@
     />
     <meta
       property="og:image"
-      content="https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker/raw/main/assets/preview.png"
+      content="https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker/raw/main/src/icons/icons.svg"
     />
     <meta property="og:url" content="https://yt-hotkeys.vkrishna04.me/" />
     <title>YouTube Keystrokes Blocker - Control YouTube Hotkeys</title>
-    <link
-      rel="icon"
-      href="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg"
-      sizes="64x64"
-    />
-    <link
-      rel="apple-touch-icon"
-      href="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg"
-    />
+    <link rel="icon" type="image/svg+xml" href="src/icons/icon.svg" />
+    <link rel="apple-touch-icon" href="src/icons/icon.svg" />
     <style>
       * {
         margin: 0;
@@ -53,6 +46,7 @@
 
       html {
         scroll-behavior: smooth;
+        scroll-padding-top: 80px;
       }
 
       body {
@@ -1092,6 +1086,153 @@
       a {
         transition: all 0.3s;
       }
+
+      /* Install Tabs */
+      .install-tabs {
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+        margin-bottom: 2.5rem;
+        border-bottom: 2px solid var(--bg-secondary);
+        padding-bottom: 0;
+      }
+
+      .install-tab {
+        background: none;
+        border: none;
+        border-bottom: 3px solid transparent;
+        margin-bottom: -2px;
+        color: #808080;
+        font-family: inherit;
+        font-size: 1rem;
+        font-weight: 600;
+        padding: 0.75rem 2rem;
+        cursor: pointer;
+        border-radius: 6px 6px 0 0;
+        transition: all 0.3s ease;
+      }
+
+      .install-tab:hover {
+        color: var(--text-light);
+        background: rgba(255, 255, 255, 0.04);
+      }
+
+      .install-tab.active {
+        color: var(--primary);
+        border-bottom-color: var(--primary);
+      }
+
+      .install-content {
+        display: none;
+      }
+
+      .install-content.active {
+        display: block;
+        animation: fadeInUp 0.3s ease-out;
+      }
+
+      .install-description {
+        color: #b0b0b0;
+        font-size: 1rem;
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+
+      .store-row {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+        margin-bottom: 1rem;
+      }
+
+      .store-btn {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 1rem 2rem;
+        border: 2px solid var(--bg-secondary);
+        border-radius: 12px;
+        background: var(--bg-card);
+        color: var(--text-light);
+        text-decoration: none;
+        font-weight: 600;
+        min-width: 160px;
+        transition: all 0.3s ease;
+      }
+
+      .store-btn:hover {
+        border-color: var(--primary);
+        transform: translateY(-4px);
+        box-shadow: 0 8px 24px rgba(255, 0, 0, 0.2);
+      }
+
+      .store-btn-name {
+        font-size: 1rem;
+      }
+
+      .store-btn-sub {
+        font-size: 0.75rem;
+        color: #808080;
+        font-weight: 400;
+      }
+
+      .install-note {
+        text-align: center;
+        color: #606060;
+        font-size: 0.85rem;
+        margin-bottom: 2.5rem;
+      }
+
+      .manual-install-section > h3 {
+        text-align: center;
+        color: var(--text-light);
+        font-size: 1.1rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .install-content code {
+        background: var(--bg-secondary);
+        padding: 0.1rem 0.4rem;
+        border-radius: 4px;
+        font-size: 0.85em;
+        font-family: monospace;
+      }
+
+      kbd {
+        background: var(--bg-secondary);
+        border: 1px solid #505050;
+        border-radius: 4px;
+        padding: 0.1rem 0.4rem;
+        font-size: 0.85em;
+        font-family: monospace;
+      }
+
+      .userscript-options {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 2rem;
+      }
+
+      .greasy-fork-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        background: linear-gradient(135deg, #c00, #e00);
+        color: white;
+        text-decoration: none;
+        padding: 0.875rem 2rem;
+        border-radius: 10px;
+        font-weight: 700;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+      }
+
+      .greasy-fork-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 24px rgba(255, 0, 0, 0.35);
+      }
     </style>
   </head>
   <body>
@@ -1100,9 +1241,10 @@
       <div class="nav-container">
         <div class="logo">
           <img
-            src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg"
+            src="src/icons/icon.svg"
             width="36"
             height="36"
+            alt="YouTube Keystrokes Blocker icon"
           />
           Keystrokes Blocker
         </div>
@@ -1129,7 +1271,6 @@
                   d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"
                 />
               </svg>
-
             </a>
           </li>
         </ul>
@@ -1145,10 +1286,24 @@
       </p>
       <div class="cta-buttons">
         <a
-          href="https://raw.githubusercontent.com/Life-Experimentalist/Youtube-Keystrokes-Blocker/main/disable-yt-hotkeys.user.js"
+          href="#install"
           class="btn btn-primary"
+          onclick="
+            event.preventDefault();
+            document
+              .getElementById('install')
+              .scrollIntoView({ behavior: 'smooth' });
+            showInstallTab('extension');
+          "
         >
-          📥 Install Now
+          🧩 Browser Extension
+        </a>
+        <a
+          href="https://greasyfork.org/en/scripts/563265-disable-youtube-hotkeys-with-modern-settings-page"
+          class="btn btn-primary"
+          target="_blank"
+        >
+          📜 Userscript
         </a>
         <a
           href="https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker"
@@ -1217,11 +1372,11 @@
           </p>
         </div>
         <div class="feature-card">
-          <div class="feature-icon">🔄</div>
-          <h3>Auto-Updated</h3>
+          <div class="feature-icon">🧩</div>
+          <h3>Two Install Options</h3>
           <p>
-            Stays current with the latest improvements. Your userscript manager
-            handles updates.
+            Install as a native browser extension (Chrome, Firefox, Edge) or as
+            a userscript via Tampermonkey — your choice.
           </p>
         </div>
       </div>
@@ -1326,7 +1481,7 @@
               <div class="stat-label">Hotkeys</div>
             </div>
             <div class="stat">
-              <div class="stat-value">v4.5.0</div>
+              <div class="stat-value">v5.0.0</div>
               <div class="stat-label">Latest</div>
             </div>
           </div>
@@ -1558,73 +1713,121 @@
         </div>
         <div class="demo-setting">
           <span class="demo-label">Disable Numbers (0–9)</span>
-          <div class="toggle active demo-toggle" data-setting="numbers" onclick="toggleDemoSetting(this)">
+          <div
+            class="toggle active demo-toggle"
+            data-setting="numbers"
+            onclick="toggleDemoSetting(this)"
+          >
             <div class="toggle-knob"></div>
           </div>
         </div>
         <div class="demo-setting">
           <span class="demo-label">Disable Spacebar</span>
-          <div class="toggle demo-toggle" data-setting="spacebar" onclick="toggleDemoSetting(this)">
+          <div
+            class="toggle demo-toggle"
+            data-setting="spacebar"
+            onclick="toggleDemoSetting(this)"
+          >
             <div class="toggle-knob"></div>
           </div>
         </div>
         <div class="demo-setting">
           <span class="demo-label">Disable Arrow Keys</span>
-          <div class="toggle demo-toggle" data-setting="arrowKeys" onclick="toggleDemoSetting(this)">
+          <div
+            class="toggle demo-toggle"
+            data-setting="arrowKeys"
+            onclick="toggleDemoSetting(this)"
+          >
             <div class="toggle-knob"></div>
           </div>
         </div>
         <div class="demo-setting">
           <span class="demo-label">Disable Ctrl + Left</span>
-          <div class="toggle active demo-toggle" data-setting="ctrlLeft" onclick="toggleDemoSetting(this)">
+          <div
+            class="toggle active demo-toggle"
+            data-setting="ctrlLeft"
+            onclick="toggleDemoSetting(this)"
+          >
             <div class="toggle-knob"></div>
           </div>
         </div>
         <div class="demo-setting">
           <span class="demo-label">Disable Ctrl + Right</span>
-          <div class="toggle active demo-toggle" data-setting="ctrlRight" onclick="toggleDemoSetting(this)">
+          <div
+            class="toggle active demo-toggle"
+            data-setting="ctrlRight"
+            onclick="toggleDemoSetting(this)"
+          >
             <div class="toggle-knob"></div>
           </div>
         </div>
         <div class="demo-setting">
           <span class="demo-label">Disable "F" (Fullscreen)</span>
-          <div class="toggle demo-toggle" data-setting="fullscreen" onclick="toggleDemoSetting(this)">
+          <div
+            class="toggle demo-toggle"
+            data-setting="fullscreen"
+            onclick="toggleDemoSetting(this)"
+          >
             <div class="toggle-knob"></div>
           </div>
         </div>
         <div class="demo-setting">
           <span class="demo-label">Disable "M" (Mute)</span>
-          <div class="toggle active demo-toggle" data-setting="mute" onclick="toggleDemoSetting(this)">
+          <div
+            class="toggle active demo-toggle"
+            data-setting="mute"
+            onclick="toggleDemoSetting(this)"
+          >
             <div class="toggle-knob"></div>
           </div>
         </div>
         <div class="demo-setting">
           <span class="demo-label">Disable Speed (Shift+<>)</span>
-          <div class="toggle demo-toggle" data-setting="speed" onclick="toggleDemoSetting(this)">
+          <div
+            class="toggle demo-toggle"
+            data-setting="speed"
+            onclick="toggleDemoSetting(this)"
+          >
             <div class="toggle-knob"></div>
           </div>
         </div>
         <div class="demo-setting">
           <span class="demo-label">Disable Frame Skip (./,)</span>
-          <div class="toggle demo-toggle" data-setting="frameSkip" onclick="toggleDemoSetting(this)">
+          <div
+            class="toggle demo-toggle"
+            data-setting="frameSkip"
+            onclick="toggleDemoSetting(this)"
+          >
             <div class="toggle-knob"></div>
           </div>
         </div>
         <div class="demo-setting">
           <span class="demo-label">Disable Play/Pause (K)</span>
-          <div class="toggle demo-toggle" data-setting="playPause" onclick="toggleDemoSetting(this)">
+          <div
+            class="toggle demo-toggle"
+            data-setting="playPause"
+            onclick="toggleDemoSetting(this)"
+          >
             <div class="toggle-knob"></div>
           </div>
         </div>
         <div class="demo-setting">
           <span class="demo-label">Disable Theatre Mode (T)</span>
-          <div class="toggle demo-toggle" data-setting="theatreMode" onclick="toggleDemoSetting(this)">
+          <div
+            class="toggle demo-toggle"
+            data-setting="theatreMode"
+            onclick="toggleDemoSetting(this)"
+          >
             <div class="toggle-knob"></div>
           </div>
         </div>
         <div class="demo-setting">
           <span class="demo-label">Disable Captions (C)</span>
-          <div class="toggle demo-toggle" data-setting="captions" onclick="toggleDemoSetting(this)">
+          <div
+            class="toggle demo-toggle"
+            data-setting="captions"
+            onclick="toggleDemoSetting(this)"
+          >
             <div class="toggle-knob"></div>
           </div>
         </div>
@@ -1654,35 +1857,160 @@
     <!-- Installation Section -->
     <section id="install" class="installation">
       <h2 class="section-title">Quick Installation</h2>
-      <div class="steps">
-        <div class="step">
-          <div class="step-number">1</div>
-          <h3>Install Manager</h3>
-          <p>
-            Get Tampermonkey, Greasemonkey, or Violentmonkey from your browser's
-            extension store
-          </p>
+
+      <div class="install-tabs">
+        <button
+          class="install-tab active"
+          id="tab-btn-extension"
+          onclick="showInstallTab('extension')"
+        >
+          🧩 Browser Extension
+        </button>
+        <button
+          class="install-tab"
+          id="tab-btn-userscript"
+          onclick="showInstallTab('userscript')"
+        >
+          📜 Userscript
+        </button>
+      </div>
+
+      <!-- Browser Extension Tab -->
+      <div class="install-content active" id="tab-extension">
+        <p class="install-description">
+          Native extension — no userscript manager needed. Works on Chrome,
+          Firefox, and Edge.
+        </p>
+        <div class="store-row">
+          <a
+            href="https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker/releases/latest"
+            target="_blank"
+            class="store-btn"
+          >
+            <img
+              src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/chrome/chrome-original.svg"
+              width="36"
+              height="36"
+              alt="Chrome"
+            />
+            <span class="store-btn-name">Chrome / Edge</span>
+            <span class="store-btn-sub">Download ZIP</span>
+          </a>
+          <a
+            href="https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker/releases/latest"
+            target="_blank"
+            class="store-btn"
+          >
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/a/a0/Firefox_logo%2C_2019.svg"
+              width="36"
+              height="36"
+              alt="Firefox"
+            />
+            <span class="store-btn-name">Firefox</span>
+            <span class="store-btn-sub">Download ZIP</span>
+          </a>
         </div>
-        <div class="step">
-          <div class="step-number">2</div>
-          <h3>Click Install</h3>
-          <p>
-            Click the install button on this page to add the script to your
-            manager
-          </p>
+        <p class="install-note">
+          🔜 Store submissions for Chrome Web Store, Firefox AMO, and Edge
+          Add-ons are in progress.
+        </p>
+        <div class="manual-install-section">
+          <h3>Manual Sideload Steps</h3>
+          <div class="steps">
+            <div class="step">
+              <div class="step-number">1</div>
+              <h3>Download ZIP</h3>
+              <p>
+                Get the latest release from
+                <a
+                  href="https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker/releases/latest"
+                  target="_blank"
+                  >GitHub Releases</a
+                >
+              </p>
+            </div>
+            <div class="step">
+              <div class="step-number">2</div>
+              <h3>Load Unpacked</h3>
+              <p>
+                Chrome/Edge: <code>chrome://extensions</code> → Developer Mode →
+                Load unpacked.<br />Firefox: <code>about:debugging</code> → Load
+                Temporary Add-on
+              </p>
+            </div>
+            <div class="step">
+              <div class="step-number">3</div>
+              <h3>Go to YouTube</h3>
+              <p>The extension activates automatically on all YouTube pages</p>
+            </div>
+            <div class="step">
+              <div class="step-number">4</div>
+              <h3>Configure</h3>
+              <p>
+                Click the toolbar icon or press <kbd>Alt+Shift+H</kbd> to open
+                settings
+              </p>
+            </div>
+          </div>
         </div>
-        <div class="step">
-          <div class="step-number">3</div>
-          <h3>Go to YouTube</h3>
-          <p>
-            Visit youtube.com and look for the keyboard icon in the player
-            controls
-          </p>
+      </div>
+
+      <!-- Userscript Tab -->
+      <div class="install-content" id="tab-userscript">
+        <p class="install-description">
+          Runs via a userscript manager. Works in any browser that supports
+          Tampermonkey, Greasemonkey, or Violentmonkey.
+        </p>
+        <div class="userscript-options">
+          <a
+            href="https://greasyfork.org/en/scripts/563265-disable-youtube-hotkeys-with-modern-settings-page"
+            target="_blank"
+            class="greasy-fork-btn"
+          >
+            <img
+              src="https://greasyfork.org/vite/assets/blacklogo96-CxYTSM_T.png"
+              width="24"
+              height="24"
+              alt="Greasy Fork"
+            />
+            Install from Greasy Fork
+          </a>
         </div>
-        <div class="step">
-          <div class="step-number">4</div>
-          <h3>Configure</h3>
-          <p>Click the icon to open settings and customize your hotkeys</p>
+        <div class="steps">
+          <div class="step">
+            <div class="step-number">1</div>
+            <h3>Install Manager</h3>
+            <p>
+              Get Tampermonkey, Greasemonkey, or Violentmonkey from your
+              browser's extension store
+            </p>
+          </div>
+          <div class="step">
+            <div class="step-number">2</div>
+            <h3>Click Install</h3>
+            <p>
+              Use the Greasy Fork button above or the
+              <a
+                href="https://raw.githubusercontent.com/Life-Experimentalist/Youtube-Keystrokes-Blocker/main/disable-yt-hotkeys.user.js"
+                target="_blank"
+                >direct GitHub link</a
+              >
+            </p>
+          </div>
+          <div class="step">
+            <div class="step-number">3</div>
+            <h3>Go to YouTube</h3>
+            <p>
+              Visit youtube.com and look for the keyboard icon ⌨️ in the player
+              controls
+            </p>
+          </div>
+          <div class="step">
+            <div class="step-number">4</div>
+            <h3>Configure</h3>
+            <p>Click the icon to open settings and customize your hotkeys</p>
+          </div>
         </div>
       </div>
     </section>
@@ -1892,9 +2220,26 @@
         </div>
         <div class="faq-answer">
           <div class="faq-content">
-            The script is actively maintained. Updates are released when bugs
-            are fixed or new features are added. Your userscript manager will
-            automatically check for updates.
+            Actively maintained — updates are released when bugs are fixed or
+            new features are added. Greasy Fork userscript installs check for
+            updates daily automatically. Extension users will receive updates
+            via the browser store once submissions are approved.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>Extension vs userscript — which is better?</span>
+          <span class="faq-toggle">▼</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-content">
+            Both have identical hotkey-blocking functionality. The browser
+            extension requires no extra software and opens settings with
+            <strong>Alt+Shift+H</strong>. The userscript needs a manager like
+            Tampermonkey but benefits from automatic daily updates via Greasy
+            Fork. Choose whichever fits your workflow.
           </div>
         </div>
       </div>
@@ -2012,19 +2357,19 @@
       function viewDemoShortcuts() {
         const shortcuts = {
           "Numbers (0-9)": "Jump to specific video position",
-          "Spacebar": "Play / Pause",
+          Spacebar: "Play / Pause",
           "Arrow Keys": "Previous/Next frame or 5 second skip",
           "Ctrl + Left": "Jump back 1 second",
           "Ctrl + Right": "Jump forward 1 second",
-          "F": "Toggle fullscreen",
-          "M": "Mute / Unmute",
+          F: "Toggle fullscreen",
+          M: "Mute / Unmute",
           "Shift + <": "Decrease playback speed",
           "Shift + >": "Increase playback speed",
           ".": "Next frame",
           ",": "Previous frame",
-          "K": "Play / Pause",
-          "T": "Toggle theatre mode",
-          "C": "Toggle captions",
+          K: "Play / Pause",
+          T: "Toggle theatre mode",
+          C: "Toggle captions",
         };
 
         let message = "📋 YouTube Hotkeys Reference\n\n";
@@ -2135,6 +2480,20 @@
 
       // Initialize demo settings on page load
       initializeDemoSettings();
+
+      // Install tab switching
+      function showInstallTab(tabName) {
+        document
+          .querySelectorAll(".install-content")
+          .forEach((el) => el.classList.remove("active"));
+        document
+          .querySelectorAll(".install-tab")
+          .forEach((el) => el.classList.remove("active"));
+        const content = document.getElementById("tab-" + tabName);
+        const btn = document.getElementById("tab-btn-" + tabName);
+        if (content) content.classList.add("active");
+        if (btn) btn.classList.add("active");
+      }
     </script>
   </body>
 </html>

@@ -1,15 +1,18 @@
 {
   "name": "youtube-keystrokes-blocker",
-"version": "4.5.0",
-"description": "Control YouTube keyboard shortcuts with fine-grained settings. Block distracting hotkeys while keeping the ones you need.",
+  "version": "5.0.0",
+  "description": "Control YouTube keyboard shortcuts with fine-grained settings. Block distracting hotkeys while keeping the ones you need.",
   "main": "disable-yt-hotkeys.user.js",
   "scripts": {
+    "build:chrome": "powershell -NoProfile -ExecutionPolicy Bypass -File ./scripts/Build-Extension.ps1 -Browser chrome",
+    "build:firefox": "powershell -NoProfile -ExecutionPolicy Bypass -File ./scripts/Build-Extension.ps1 -Browser firefox",
+    "build:all": "powershell -NoProfile -ExecutionPolicy Bypass -File ./scripts/Build-All.ps1",
     "version:major": "powershell -NoProfile -ExecutionPolicy Bypass -File ./scripts/Update-Version.ps1 -Type major",
     "version:minor": "powershell -NoProfile -ExecutionPolicy Bypass -File ./scripts/Update-Version.ps1 -Type minor",
     "version:patch": "powershell -NoProfile -ExecutionPolicy Bypass -File ./scripts/Update-Version.ps1 -Type patch",
     "version:set": "powershell -NoProfile -ExecutionPolicy Bypass -File ./scripts/Update-Version.ps1 -NewVersion",
     "release": "powershell -NoProfile -ExecutionPolicy Bypass -File ./scripts/Release.ps1",
-    "clean": "echo \"🧹 Cleaning temporary files...\" && powershell -Command \"Remove-Item -Path ./*.tmp -ErrorAction SilentlyContinue\""
+    "clean": "powershell -Command \"Get-ChildItem -Path . -Filter *.tmp -File | Remove-Item -ErrorAction Stop; if (Test-Path ./build) { Remove-Item -Path ./build -Recurse -ErrorAction Stop }\""
   },
   "repository": {
     "type": "git",
@@ -29,15 +32,15 @@
     "name": "VKrishna04",
     "email": "hello@vkrishna04.me",
     "url": "https://vkrishna04.me"
-},
+  },
   "license": "Apache-2.0",
-"bugs": {
+  "bugs": {
     "url": "https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker/issues"
-},
-"homepage": "https://yt-hotkeys.vkrishna04.me/",
-"engines": {
+  },
+  "homepage": "https://yt-hotkeys.vkrishna04.me/",
+  "engines": {
     "node": ">=14.0.0"
-},
-"devDependencies": {},
-"dependencies": {}
+  },
+  "devDependencies": {},
+  "dependencies": {}
 }

@@ -8,6 +8,8 @@
     - MANIFEST.json (version field)
     - README.md (version badge)
     - CHANGELOG.md (adds new version entry)
+    - src/manifests/manifest.chrome.json (extension version)
+    - src/manifests/manifest.firefox.json (extension version)
 
 .PARAMETER NewVersion
     The new version number (e.g., "4.4", "5.0")
@@ -43,9 +45,11 @@ $UserScriptPath = Join-Path $ProjectRoot 'disable-yt-hotkeys.user.js'
 $ManifestPath = Join-Path $ProjectRoot 'MANIFEST.json'
 $ReadmePath = Join-Path $ProjectRoot 'README.md'
 $ChangelogPath = Join-Path $ProjectRoot 'CHANGELOG.md'
+$ChromeManifestPath = Join-Path $ProjectRoot 'src\manifests\manifest.chrome.json'
+$FirefoxManifestPath = Join-Path $ProjectRoot 'src\manifests\manifest.firefox.json'
 
 function Get-CurrentVersion {
-    Write-Host "`n📖 Reading current version..." -ForegroundColor Cyan
+    Write-Host "`n[*] Reading current version..." -ForegroundColor Cyan
 
     $userScriptContent = Get-Content $UserScriptPath -Raw
     if ($userScriptContent -match '@version\s+(\d+\.\d+(?:\.\d+)?)') {
@@ -87,10 +91,10 @@ function Get-NextVersion {
 if ($PSCmdlet.ParameterSetName -eq 'Auto') {
     $currentVer = Get-CurrentVersion
     $NewVersion = Get-NextVersion -CurrentVersion $currentVer -BumpType $Type
-    Write-Host "   Auto-bumping ($Type): $currentVer → $NewVersion" -ForegroundColor Green
+    Write-Host "   Auto-bumping ($Type): $currentVer -> $NewVersion" -ForegroundColor Green
 }
 
-Write-Host "`n🔄 Updating to version: $NewVersion" -ForegroundColor Green
+Write-Host "`n[*] Updating to version: $NewVersion" -ForegroundColor Green
 
 # Validation
 if ($NewVersion -notmatch '^\d+\.\d+(?:\.\d+)?$') {
@@ -98,36 +102,59 @@ if ($NewVersion -notmatch '^\d+\.\d+(?:\.\d+)?$') {
 }
 
 # Update Userscript
-Write-Host "`n1️⃣  Updating userscript..." -ForegroundColor Cyan
+Write-Host "`n[1] Updating userscript..." -ForegroundColor Cyan
 $userScriptContent = Get-Content $UserScriptPath -Raw
 $userScriptContent = $userScriptContent -replace '@version\s+\d+\.\d+(?:\.\d+)?', "@version      $NewVersion"
 Set-Content -Path $UserScriptPath -Value $userScriptContent -NoNewline
-Write-Host "   ✅ Updated disable-yt-hotkeys.user.js" -ForegroundColor Green
+Write-Host "   [OK] Updated disable-yt-hotkeys.user.js" -ForegroundColor Green
 
 # Update MANIFEST.json
-Write-Host "`n2️⃣  Updating MANIFEST.json..." -ForegroundColor Cyan
+Write-Host "`n[2] Updating MANIFEST.json..." -ForegroundColor Cyan
 $manifestContent = Get-Content $ManifestPath -Raw | ConvertFrom-Json
 $manifestContent.version = $NewVersion
 $manifestContent | ConvertTo-Json -Depth 100 | Set-Content -Path $ManifestPath
-Write-Host "   ✅ Updated MANIFEST.json" -ForegroundColor Green
+Write-Host "   [OK] Updated MANIFEST.json" -ForegroundColor Green
 
 # Update README.md
-Write-Host "`n3️⃣  Updating README.md..." -ForegroundColor Cyan
+Write-Host "`n[3] Updating README.md..." -ForegroundColor Cyan
 $readmeContent = Get-Content $ReadmePath -Raw
 $readmeContent = $readmeContent -replace 'version-\d+\.\d+(?:\.\d+)?-', "version-$NewVersion-"
 Set-Content -Path $ReadmePath -Value $readmeContent -NoNewline
-Write-Host "   ✅ Updated README.md" -ForegroundColor Green
+Write-Host "   [OK] Updated README.md" -ForegroundColor Green
+
+# Update Chrome extension manifest
+Write-Host "`n[4] Updating src/manifests/manifest.chrome.json..." -ForegroundColor Cyan
+if (Test-Path $ChromeManifestPath) {
+    $chromeManifest = Get-Content $ChromeManifestPath -Raw | ConvertFrom-Json
+    $chromeManifest.version = $NewVersion
+    $chromeManifest | ConvertTo-Json -Depth 100 | Set-Content -Path $ChromeManifestPath
+    Write-Host "   [OK] Updated manifest.chrome.json" -ForegroundColor Green
+}
+else {
+    Write-Host "   [SKIP] src/manifests/manifest.chrome.json not found (skipping)" -ForegroundColor Gray
+}
+
+# Update Firefox extension manifest
+Write-Host "`n[5] Updating src/manifests/manifest.firefox.json..." -ForegroundColor Cyan
+if (Test-Path $FirefoxManifestPath) {
+    $firefoxManifest = Get-Content $FirefoxManifestPath -Raw | ConvertFrom-Json
+    $firefoxManifest.version = $NewVersion
+    $firefoxManifest | ConvertTo-Json -Depth 100 | Set-Content -Path $FirefoxManifestPath
+    Write-Host "   [OK] Updated manifest.firefox.json" -ForegroundColor Green
+}
+else {
+    Write-Host "   [SKIP] src/manifests/manifest.firefox.json not found (skipping)" -ForegroundColor Gray
+}
 
 # Update CHANGELOG.md (add placeholder for new version)
-Write-Host "`n4️⃣  Updating CHANGELOG.md..." -ForegroundColor Cyan
+Write-Host "`n[6] Updating CHANGELOG.md..." -ForegroundColor Cyan
 $changelogContent = Get-Content $ChangelogPath -Raw
 $today = Get-Date -Format 'yyyy-MM-dd'
 
 # Check if version already exists
 if ($changelogContent -notmatch "\[$NewVersion\]") {
-    # Create the new entry - using array join instead of here-string
-    $newEntry = ""
-    $newEntry += "`n`n## [$NewVersion] - $today`n`n"
+    # Create the new entry
+    $newEntry = "`n`n## [$NewVersion] - $today`n`n"
     $newEntry += "### Added`n"
     $newEntry += "- [Timing Fix] Improved button injection reliability on first page load`n"
     $newEntry += "- [Events] Added proper YouTube SPA navigation event listeners`n"
@@ -142,28 +169,33 @@ if ($changelogContent -notmatch "\[$NewVersion\]") {
     # Insert after "## [Unreleased]" or before the first version
     if ($changelogContent -match '##\s+\[Unreleased\]') {
         $changelogContent = $changelogContent -replace '(##\s+\[Unreleased\][^\n]*\n)', "`$1$newEntry"
-    } else {
+    }
+    else {
         # Insert before first version entry
         $changelogContent = $changelogContent -replace '(##\s+\[\d+\.\d+)', "$newEntry`$1"
     }
 
     Set-Content -Path $ChangelogPath -Value $changelogContent -NoNewline
-    Write-Host "   ✅ Added new version entry to CHANGELOG.md" -ForegroundColor Green
-} else {
-    Write-Host "   ⚠️  Version $NewVersion already exists in CHANGELOG.md" -ForegroundColor Yellow
+    Write-Host "   [OK] Added new version entry to CHANGELOG.md" -ForegroundColor Green
+}
+else {
+    Write-Host "   [WARN] Version $NewVersion already exists in CHANGELOG.md" -ForegroundColor Yellow
 }
 
 # Summary
-Write-Host "`n" + ("=" * 60) -ForegroundColor Magenta
-Write-Host "✨ Version Update Complete!" -ForegroundColor Green
-Write-Host ("=" * 60) -ForegroundColor Magenta
+Write-Host ""
+Write-Host "=====================================================" -ForegroundColor Magenta
+Write-Host "  [DONE] Version Update Complete!                   " -ForegroundColor Green
+Write-Host "=====================================================" -ForegroundColor Magenta
 Write-Host "`nUpdated Files:" -ForegroundColor Cyan
-Write-Host "  • disable-yt-hotkeys.user.js" -ForegroundColor White
-Write-Host "  • MANIFEST.json" -ForegroundColor White
-Write-Host "  • README.md" -ForegroundColor White
-Write-Host "  • CHANGELOG.md" -ForegroundColor White
+Write-Host "  - disable-yt-hotkeys.user.js" -ForegroundColor White
+Write-Host "  - MANIFEST.json" -ForegroundColor White
+Write-Host "  - README.md" -ForegroundColor White
+Write-Host "  - CHANGELOG.md" -ForegroundColor White
+Write-Host "  - src/manifests/manifest.chrome.json" -ForegroundColor White
+Write-Host "  - src/manifests/manifest.firefox.json" -ForegroundColor White
 
-Write-Host "`n📝 Next Steps:" -ForegroundColor Cyan
+Write-Host "`n[*] Next Steps:" -ForegroundColor Cyan
 Write-Host "  1. Review CHANGELOG.md and update the entries" -ForegroundColor White
 Write-Host "  2. Test the userscript" -ForegroundColor White
 Write-Host "  3. Commit changes:" -ForegroundColor White
@@ -172,5 +204,3 @@ Write-Host "     git commit -m `"chore: bump version to $NewVersion`"" -Foregrou
 Write-Host "  4. Create tag: git tag v$NewVersion" -ForegroundColor White
 Write-Host "  5. Push changes:" -ForegroundColor White
 Write-Host "     git push" -ForegroundColor Gray
-Write-Host "     git push --tags" -ForegroundColor Gray
-Write-Host ""

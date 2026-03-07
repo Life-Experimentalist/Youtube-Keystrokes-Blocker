@@ -1,180 +1,281 @@
-# YouTube Keystrokes Blocker
+﻿# YouTube Keystrokes Blocker
 
-A powerful userscript that gives you fine-grained control over YouTube keyboard shortcuts. Block distracting hotkeys while keeping the ones you need active.
+<img src="src/icons/icon.svg" alt="YouTube Keystrokes Blocker Logo" width="128" height="128" align="right">
 
-[![Greasy Fork](https://img.shields.io/badge/Greasy%20Fork-563265-FF0000?style=flat-square&logo=tampermonkey&logoColor=white)](https://greasyfork.org/en/scripts/563265-disable-youtube-hotkeys-with-modern-settings-page) ![Version](https://img.shields.io/badge/version-4.4-brightgreen?style=flat-square) ![License](https://img.shields.io/badge/license-Apache%202.0-blue?style=flat-square) ![Platform](https://img.shields.io/badge/platform-Browser%20Userscript-orange?style=flat-square) ![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-yellow?style=flat-square) ![Size](https://img.shields.io/badge/size-~13.5KB-blue?style=flat-square)
+
+Block distracting YouTube keyboard shortcuts while keeping the ones you need — available as a **native browser extension** and a **userscript**.
+
+[![Version](https://img.shields.io/badge/version-5.0.0-brightgreen?style=flat-square)](https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker/releases/latest)
+[![GitHub Stars](https://img.shields.io/github/stars/Life-Experimentalist/Youtube-Keystrokes-Blocker?style=flat-square&logo=github)](https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker/stargazers)
+[![GitHub Issues](https://img.shields.io/github/issues/Life-Experimentalist/Youtube-Keystrokes-Blocker?style=flat-square)](https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker/issues)
+[![GitHub Last Commit](https://img.shields.io/github/last-commit/Life-Experimentalist/Youtube-Keystrokes-Blocker?style=flat-square)](https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker/commits/main)
+[![Greasy Fork](https://img.shields.io/badge/Greasy%20Fork-563265-FF0000?style=flat-square&logo=tampermonkey&logoColor=white)](https://greasyfork.org/en/scripts/563265-disable-youtube-hotkeys-with-modern-settings-page)
+[![License](https://img.shields.io/badge/license-Apache%202.0-blue?style=flat-square)](LICENSE.md)
+[![JavaScript](https://img.shields.io/badge/JavaScript-ES2020+-yellow?style=flat-square)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+[![Chrome MV3](https://img.shields.io/badge/Chrome-Manifest%20V3-4285F4?style=flat-square&logo=googlechrome&logoColor=white)](https://developer.chrome.com/docs/extensions/mv3/intro/)
+[![Edge Add-on](https://img.shields.io/badge/Edge-Add--on-0078D7?style=flat-square&logo=microsoftedge&logoColor=white)](https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker/releases/latest)
+[![Firefox MV3](https://img.shields.io/badge/Firefox-Manifest%20V3-FF7139?style=flat-square&logo=firefox&logoColor=white)](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions)
 
 ## 📌 Features
 
 ✨ **Fine-Grained Control**
-- Selectively disable YouTube hotkeys without affecting other functionality
-- Modern, intuitive settings modal built into YouTube's player
-- Individual toggles for each hotkey group
+- Individually toggle each YouTube hotkey — enable only what you need, block everything else
+- Modern settings modal integrated directly into YouTube's player interface
+- 30+ independent hotkey toggles
 
-🎯 **Supported Hotkeys**
-- **Number Keys (0–9)** - Jump to timeline percentage
-- **Spacebar** - Play/Pause
-- **Arrow Keys** - Navigation (Up/Down for Comments, Left/Right for Timeline)
-- **Ctrl + Left/Right** - Chapter navigation
-- **F Key** - Fullscreen toggle
-- **M Key** - Mute/Unmute
-- **Shift + < / >** - Playback speed control
-- **. (Period) / , (Comma)** - Frame-by-frame navigation
+🎯 **Complete Hotkey Coverage**
+- **Number Keys (0–9)** — Jump to timeline percentage
+- **Spacebar** — Play/Pause toggle
+- **Arrow Keys** — Timeline navigation (Left/Right ±5s) and volume (Up/Down)
+- **Ctrl + Left / Right** — Chapter navigation
+- **F Key** — Fullscreen toggle
+- **M Key** — Mute/Unmute
+- **K Key** — Play/Pause (alternative)
+- **J / L Keys** — Seek ±10 seconds
+- **T Key** — Theatre mode toggle
+- **C Key** — Captions toggle
+- **I Key** — Mini player toggle
+- **Shift + < / >** — Playback speed control
+- **Period / Comma** — Frame-by-frame navigation
+- **Home / End** — Jump to beginning/end
 
-🔐 **Smart Protection**
-- Won't interfere with text input (search, comments, chat)
-- Automatically detects when you're typing
-- Preserves YouTube's core functionality
+🔐 **Smart Context Detection**
+- Automatically ignores key presses when typing in search, comments, or chat
+- Preserves all non-blocked YouTube functionality unchanged
 
-⚙️ **Easy Configuration**
-- No complicated settings files or configs
-- Access settings with a single click on the player
-- Settings persist across sessions
+⚙️ **Persistent Settings**
+- Settings saved locally — no accounts, no cloud, no privacy concerns
+- Survives page navigations and SPA transitions
+
+🧩 **Two Ways to Install**
+- Native browser extension for Chrome, Firefox, and Edge (Manifest V3)
+- Userscript for Tampermonkey, Greasemonkey, and Violentmonkey
+
+---
 
 ## 🚀 Installation
 
-### Option 1: Greasy Fork (Recommended)
+### Option A: Browser Extension (Native)
+
+> No userscript manager required. Installs directly into Chrome, Firefox, or Edge.
+
+#### Chrome & Edge
+
+1. Download `youtube-hotkeys-blocker-v5.0.0-chrome.zip` from [GitHub Releases](https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker/releases/latest)
+2. Unzip the file to a folder
+3. Chrome: navigate to `chrome://extensions/` | Edge: navigate to `edge://extensions/`
+4. Enable **Developer Mode** (toggle in the top-right)
+5. Click **Load unpacked** and select the unzipped folder
+6. The extension icon appears in your toolbar
+
+> Chrome Web Store and Edge Add-ons submissions are in progress — check [Releases](https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker/releases) for store links when available.
+
+#### Firefox
+
+1. Download `youtube-hotkeys-blocker-v5.0.0-firefox.zip` from [GitHub Releases](https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker/releases/latest)
+2. In Firefox navigate to `about:debugging#/runtime/this-firefox`
+3. Click **Load Temporary Add-on…** and select the `.zip` directly
+4. The extension activates immediately on YouTube
+
+> Firefox AMO submission is in progress — check [Releases](https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker/releases) for the store link when available.
+
+---
+
+### Option B: Userscript
+
+> Requires a userscript manager. Works on any browser that supports one.
+
+#### Step 1 — Install a Userscript Manager
+
+| Manager                                           | Chrome | Firefox | Edge | Safari |
+| ------------------------------------------------- | ------ | ------- | ---- | ------ |
+| [Tampermonkey](https://www.tampermonkey.net/) ⭐   | ✅      | ✅       | ✅    | ✅      |
+| [Greasemonkey](https://www.greasespot.net/)       | ❌      | ✅       | ❌    | ❌      |
+| [Violentmonkey](https://violentmonkey.github.io/) | ✅      | ✅       | ✅    | ❌      |
+
+#### Step 2 — Install the Script
+
+**From Greasy Fork (Recommended — auto-updates daily):**
+
 [![Install from Greasy Fork](https://img.shields.io/badge/Install%20from-Greasy%20Fork-FF0000?style=flat-square&logo=tampermonkey&logoColor=white)](https://greasyfork.org/en/scripts/563265-disable-youtube-hotkeys-with-modern-settings-page)
 
-1. Click the button above or visit the [Greasy Fork page](https://greasyfork.org/en/scripts/563265-disable-youtube-hotkeys-with-modern-settings-page)
-2. Click "Install this script"
-3. Your userscript manager will handle the rest
-4. Automatic daily updates will keep you current
+**Direct GitHub install:**
 
-### Option 2: Direct GitHub Install
-Click this link to install directly:
-👉 **[Install YouTube Keystrokes Blocker](https://raw.githubusercontent.com/Life-Experimentalist/Youtube-Keystrokes-Blocker/main/disable-yt-hotkeys.user.js)**
+👉 **[Click to install from GitHub](https://raw.githubusercontent.com/Life-Experimentalist/Youtube-Keystrokes-Blocker/main/disable-yt-hotkeys.user.js)**
 
-### Option 3: Manual Installation
+**Manual:**
+1. Open your userscript manager dashboard
+2. Create a new script
+3. Paste the contents of [`disable-yt-hotkeys.user.js`](disable-yt-hotkeys.user.js)
+4. Save and enable
 
-1. **Install a Userscript Manager**
-   - [Tampermonkey](https://www.tampermonkey.net/) (Recommended - Chrome, Firefox, Edge, Safari)
-   - [Greasemonkey](https://www.greasespot.net/) (Firefox)
-   - [Violentmonkey](https://violentmonkey.github.io/) (Chrome, Firefox, Edge)
-
-2. **Copy the Script**
-   - Visit the [raw script URL](https://raw.githubusercontent.com/Life-Experimentalist/Youtube-Keystrokes-Blocker/main/disable-yt-hotkeys.user.js)
-   - Copy the entire content
-
-3. **Create a New Script**
-   - Open your userscript manager
-   - Create a new script
-   - Paste the content
-   - Save and enable
-
-4. **Verify Installation**
-   - Visit [youtube.com](https://www.youtube.com)
-   - Look for the **keyboard icon** (⌨️) in the video player controls
-   - Click to configure your hotkeys
-
-### ⏰ Update Frequency
-- **Greasy Fork install**: Automatic daily checks for updates
-- **GitHub install**: Manual updates recommended every 1-2 weeks
-- Updates include bug fixes, feature improvements, and YouTube compatibility fixes
+---
 
 ## 💡 Usage
 
-### Accessing Settings
+### Opening Settings
 
-**Option 1: Player Button** (Recommended)
-- Look for the keyboard icon in YouTube's video player controls
-- Click to open the settings modal
-- Toggle switches to enable/disable hotkeys
-- Click "Save Changes"
+**Browser Extension:**
+- Click the toolbar icon to open the popup
+- Or press **Alt+Shift+H** (Windows/Linux) / **Cmd+Shift+H** (Mac) from any YouTube page
 
-**Option 2: Userscript Manager Menu**
-- Click your userscript manager icon
-- Select "YouTube Hotkey Settings"
+**Userscript:**
+- Look for the **⌨️ keyboard icon** in the YouTube video player controls
+- Or open your userscript manager menu → "YouTube Hotkey Settings"
 
 ### Default Configuration
 
-By default, the following hotkeys are **disabled**:
-- ✓ Number Keys (0–9)
-- ✓ Ctrl + Left
-- ✓ Ctrl + Right
-- ✓ M Key (Mute)
+| Hotkey           | Blocked by Default |
+| ---------------- | ------------------ |
+| Numbers (0–9)    | ✅ Yes              |
+| Ctrl + Left      | ✅ Yes              |
+| Ctrl + Right     | ✅ Yes              |
+| M (Mute)         | ✅ Yes              |
+| Spacebar         | ❌ No               |
+| Arrow Keys       | ❌ No               |
+| F (Fullscreen)   | ❌ No               |
+| Speed (Shift+<>) | ❌ No               |
+| Frame Skip (./,) | ❌ No               |
 
-The following are **enabled** (not blocked):
-- ✗ Spacebar
-- ✗ Arrow Keys
-- ✗ F Key (Fullscreen)
-- ✗ Shift + < / > (Speed)
-- ✗ . / , (Frame Skip)
-
-You can customize these settings to your preference.
+---
 
 ## 🛠️ Configuration
 
-All settings are saved locally in your browser. No cloud storage, no privacy concerns.
+All settings are stored locally via `chrome.storage.sync` (extension) or `GM_setValue` (userscript). No external servers involved.
 
-### Settings Options
+### Full Settings Reference
 
-| Setting                  | Default | Effect                             |
-| ------------------------ | ------- | ---------------------------------- |
-| Disable Numbers (0–9)    | ✓ ON    | Blocks timeline jump shortcuts     |
-| Disable Spacebar         | OFF     | Blocks play/pause                  |
-| Disable Arrow Keys       | OFF     | Blocks comment/timeline navigation |
-| Disable Ctrl + Left      | ✓ ON    | Blocks previous chapter            |
-| Disable Ctrl + Right     | ✓ ON    | Blocks next chapter                |
-| Disable F (Fullscreen)   | OFF     | Blocks fullscreen toggle           |
-| Disable M (Mute)         | ✓ ON    | Blocks mute toggle                 |
-| Disable Speed (Shift+<>) | OFF     | Blocks speed control               |
-| Disable Frame Skip (./,) | OFF     | Blocks frame-by-frame              |
+| Setting                  | Key                | Default | Description                       |
+| ------------------------ | ------------------ | ------- | --------------------------------- |
+| Disable Numbers (0–9)    | `disableNumbers`   | ✅ ON    | Blocks timeline jump shortcuts    |
+| Disable Spacebar         | `disableSpacebar`  | OFF     | Blocks play/pause                 |
+| Disable Arrow Keys       | `disableArrowKeys` | OFF     | Blocks timeline/volume navigation |
+| Disable Ctrl+Left        | `disableCtrlLeft`  | ✅ ON    | Blocks previous chapter           |
+| Disable Ctrl+Right       | `disableCtrlRight` | ✅ ON    | Blocks next chapter               |
+| Disable F (Fullscreen)   | `disableF`         | OFF     | Blocks fullscreen toggle          |
+| Disable M (Mute)         | `disableM`         | ✅ ON    | Blocks mute toggle                |
+| Disable K (Play/Pause)   | `disableK`         | OFF     | Blocks K key play/pause           |
+| Disable J (Seek −10s)    | `disableJ`         | OFF     | Blocks 10-second rewind           |
+| Disable L (Seek +10s)    | `disableL`         | OFF     | Blocks 10-second skip             |
+| Disable T (Theatre)      | `disableT`         | OFF     | Blocks theatre mode               |
+| Disable C (Captions)     | `disableC`         | OFF     | Blocks caption toggle             |
+| Disable I (Mini Player)  | `disableI`         | OFF     | Blocks mini player                |
+| Disable Speed (Shift+<>) | `disableSpeed`     | OFF     | Blocks speed controls             |
+| Disable Frame Skip (./,) | `disableFrameSkip` | OFF     | Blocks frame-by-frame navigation  |
+| Disable Home/End         | `disableHomeEnd`   | OFF     | Blocks jump to start/end          |
+
+---
+
+## ⌨️ Extension Keyboard Commands
+
+When installed as a browser extension, the following shortcut is available:
+
+| Command             | Windows / Linux | Mac             |
+| ------------------- | --------------- | --------------- |
+| Open Settings Popup | **Alt+Shift+H** | **Cmd+Shift+H** |
+
+To customize this shortcut:
+- **Chrome/Edge**: `chrome://extensions/shortcuts`
+- **Firefox**: `about:addons` → gear icon → Manage Extension Shortcuts
+
+---
 
 ## 🔍 How It Works
 
-1. **Listens for keydown events** on the YouTube page
-2. **Checks against blocked hotkeys** based on your settings
-3. **Prevents default behavior** for disabled keys
-4. **Ignores keys while typing** in search, comments, or chat
-5. **Persists settings** using browser storage (no external servers)
+1. **Intercepts keyboard events** on `www.youtube.com` at `document_start`
+2. **Checks each key** against your saved settings
+3. **Calls `preventDefault()` and `stopImmediatePropagation()`** for blocked keys, preventing YouTube from processing them
+4. **Skips blocking** when focus is in a search box, comment field, or any other text input
+5. **Watches for SPA navigation** (`yt-navigate-finish`) to re-attach handlers after YouTube's client-side page transitions
+6. **Persists settings** using `chrome.storage.sync` (extension) or `GM_setValue` (userscript) — no external servers
+
+---
 
 ## 🐛 Troubleshooting
 
-### Script not working?
-- Ensure your userscript manager is enabled
-- Try visiting a YouTube video page
-- Refresh the page (F5 or Ctrl+R)
+### Extension not working?
+- Verify the extension is enabled at `chrome://extensions/` or `about:addons`
+- Reload the YouTube tab after enabling
+- Check that the `*://www.youtube.com/*` host permission is granted
+
+### Userscript not working?
+- Ensure your userscript manager is enabled for YouTube
+- Reload the YouTube page
+- Check that no other extensions are intercepting keyboard events before this one
 
 ### Settings not saving?
-- Check that your browser allows the userscript manager to access YouTube
-- Clear your browser cache and try again
-- Disable any conflicting extensions
+- **Extension**: confirm the `storage` permission is granted
+- **Userscript**: confirm your manager allows `GM_setValue` on `youtube.com`
+- Disable any aggressive privacy extensions temporarily to test
 
-### Keyboard icon not showing?
+### Keyboard icon not showing (userscript only)?
 - Refresh the YouTube page
-- Some video player skins might hide it
-- Use the userscript manager menu as an alternative
+- Navigate to a video — the button injects into the player controls after the player loads
+- Use the userscript manager menu as a fallback access method
 
 ### Need help?
-📧 Create an issue on [GitHub Issues](https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker/issues)
+[Open an issue on GitHub](https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker/issues)
 
-## 📝 License
+---
 
-This project is licensed under the **Apache License 2.0** - see the [LICENSE](LICENSE) file for details.
+## 🔧 Development
 
-## 🤝 Contributing
+### Project Structure
 
-Found a bug? Have a feature request? Feel free to:
-1. [Open an issue](https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker/issues)
-2. Submit a pull request
-3. Discuss improvements in the issues section
+```
+Youtube Keystrokes Blocker/
+├── disable-yt-hotkeys.user.js     # Userscript (single-file, self-contained)
+├── src/
+│   ├── content.js                 # Extension content script
+│   ├── background.js              # Extension service worker
+│   ├── content.css                # Content script styles
+│   ├── popup/                     # Toolbar popup UI
+│   ├── options/                   # Full options page UI
+│   ├── manifests/
+│   │   ├── manifest.chrome.json   # Chrome/Edge MV3 manifest
+│   │   └── manifest.firefox.json  # Firefox MV3 manifest
+│   └── icons/                     # SVG source icon
+├── scripts/
+│   ├── Build-Extension.ps1        # Builds Chrome + Firefox ZIPs
+│   ├── Build-All.ps1              # Builds extension + copies userscript
+│   └── Update-Version.ps1         # Bumps version across all files
+├── release/                       # Built artifacts (git-ignored)
+└── docs/                          # Documentation
+```
 
-### 🔧 Development & Version Management
+### Build Commands
 
-We use automated scripts to manage versions and releases:
+```powershell
+# Build all artifacts (extension ZIPs + userscript copy)
+npm run build:all
 
-```bash
-# Bump version (patch/minor/major)
-npm run version:patch   # 4.3 → 4.3.1
-npm run version:minor   # 4.3 → 4.4
-npm run version:major   # 4.3 → 5.0
+# Build extension packages only
+npm run build:extension
 
-# Create a release
+# Version management
+npm run version:patch    # 5.0.0 → 5.0.1
+npm run version:minor    # 5.0.0 → 5.1.0
+npm run version:major    # 5.0.0 → 6.0.0
+
+# Full release (version bump + build)
 npm run release
 ```
 
-See [scripts/README.md](scripts/README.md) for detailed documentation on our automation tools.
+---
+
+## 📝 License
+
+Licensed under the **Apache License 2.0** — see [LICENSE.md](LICENSE.md) for details.
+
+## 🤝 Contributing
+
+1. [Fork the repository](https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker/fork)
+2. Make your changes
+3. [Open a pull request](https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker/pulls)
+
+Bug reports and feature requests are welcome on [GitHub Issues](https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker/issues).
+
+---
 
 ## 👨‍💻 Author
 
@@ -184,32 +285,17 @@ Part of the [Life Experimentalist](https://github.com/Life-Experimentalist) orga
 
 ## 🌐 Links
 
-- 🏠 [Homepage](https://vkrishna04.me)
-- 📦 [GitHub Repository](https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker)
-- 🐛 [Issues & Support](https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker/issues)
-- 📋 [Latest Release](https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker/releases)
-
-## 📊 [Version History](CHANGELOG.md)
-
-> Check out the [CHANGELOG](CHANGELOG.md) for a detailed version history and update notes.
-
-## ⭐ If you find this useful, please star the repository!
-
-Your support helps us continue improving this script and creating more useful tools.
+|               |                                                                                                                       |
+| ------------- | --------------------------------------------------------------------------------------------------------------------- |
+| 🏠 Homepage    | [yt-hotkeys.vkrishna04.me](https://yt-hotkeys.vkrishna04.me/)                                                         |
+| 📦 GitHub      | [Life-Experimentalist/Youtube-Keystrokes-Blocker](https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker) |
+| 🐛 Issues      | [GitHub Issues](https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker/issues)                            |
+| 📋 Releases    | [GitHub Releases](https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker/releases)                        |
+| 📦 Greasy Fork | [Script page](https://greasyfork.org/en/scripts/563265-disable-youtube-hotkeys-with-modern-settings-page)             |
+| 📊 Changelog   | [CHANGELOG.md](CHANGELOG.md)                                                                                          |
 
 ---
 
-**Last Updated:** January 19, 2026 | **Version 4.3** | **Active Development** ✅
+**Last Updated:** 2026 | **Version 5.0.0** | **Active Development** ✅
 
-**Status**: Production Ready | Downloads via Greasy Fork | Daily Auto-Updates Enabled
-
----
-
-## 🎯 Quick Links
-
-| Link                                                                                                        | Purpose                                   |
-| ----------------------------------------------------------------------------------------------------------- | ----------------------------------------- |
-| [📦 Greasy Fork](https://greasyfork.org/en/scripts/563265-disable-youtube-hotkeys-with-modern-settings-page) | Official distribution & automatic updates |
-| [🐛 GitHub Issues](https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker/issues)                | Report bugs & request features            |
-| [📝 GitHub Repo](https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker)                         | View source code & contribute             |
-| [🏠 Author Homepage](https://vkrishna04.me)                                                                  | Learn more about the author               |
+⭐ If you find this useful, please [star the repository](https://github.com/Life-Experimentalist/Youtube-Keystrokes-Blocker)!

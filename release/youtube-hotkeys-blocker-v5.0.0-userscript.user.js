@@ -95,7 +95,7 @@
     const block = () => {
       e.preventDefault();
       e.stopPropagation();
-      // e.stopImmediatePropagation();
+      e.stopImmediatePropagation();
     };
 
     if (

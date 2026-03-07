@@ -7,7 +7,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [5.0](./docs/Release%20Notes/RELEASE_NOTES_v5.0.md) - 2026-03-07
+
+### Added
+- **`Browser Extension`** Native browser extension for Chrome, Edge, and Firefox (Manifest V3) with no Tampermonkey required
+- **`Toolbar Popup`** Click the extension icon to access a compact quick-settings panel from any YouTube tab
+- **`Full Options Page`** Dedicated full-page settings accessible from the extension menu, grouped by category with descriptions for every hotkey
+- **`Cross-device Sync`** Settings sync automatically across devices via `chrome.storage.sync` (Chrome/Edge) and Firefox Sync
+- **`Live Settings Propagation`** Changes saved in the popup or options page take effect in-page immediately via `chrome.storage.onChanged` — no tab reload needed
+- **`Build System`** PowerShell build pipeline (`Build-Extension.ps1`, `Build-All.ps1`) generates versioned `.zip` artifacts in `release/` for Chrome and Firefox
+- **`Version Sync`** `Update-Version.ps1` now updates all 6 version files including both extension manifests
+
+### Fixed
+- **`Critical — SPA Navigation`** Hotkey button now correctly appears when navigating to a new YouTube video via in-page links (clicking a thumbnail), not just on hard reload. Root cause: the old button element persisted in the DOM during SPA navigation, causing the injection guard to falsely detect it as already injected and bail out.
+  - Added `yt-navigate-start` listener that removes the button the moment navigation begins
+  - `handlePageChange()` also explicitly removes any stale button before scheduling re-injection
+  - `yt-page-data-updated` handler now checks `isInjecting` to avoid redundant resets
+  - MutationObserver callback is debounced (80 ms) to prevent flooding `tryInjectWithRetry()` on rapid DOM mutations
+
+### Changed
+- `npm run build:all` builds Chrome + Firefox extensions and copies the userscript into `release/`
+- `npm run release` now runs the full build before creating the git tag
+- Extension background service worker (`background.js`) seeds default settings on first install only, preserving user settings on updates
+
+---
+
 ## [4.5](./docs/Release%20Notes/RELEASE_NOTES_v4.5.md) - 2026-01-25
+
 
 ### Added
 - **`Playback Controls`** Added toggles for all major playback hotkeys: Play/Pause (k), Rewind (j), Fast Forward (l), Previous Video (Shift+p), Next Video (Shift+n)

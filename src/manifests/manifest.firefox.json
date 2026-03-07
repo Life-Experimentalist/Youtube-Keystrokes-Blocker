@@ -1,0 +1,101 @@
+{
+    "manifest_version": 3,
+    "name": "YouTube Keystrokes Blocker",
+    "version": "5.0.0",
+    "description": "Control YouTube keyboard shortcuts with fine-grained settings. Block distracting hotkeys while keeping the ones you need.",
+    "author": "VKrishna04",
+    "homepage_url": "https://yt-hotkeys.vkrishna04.me/",
+    "incognito": "spanning",
+    "icons": {
+        "16": "icons/icon.svg",
+        "48": "icons/icon.svg",
+        "128": "icons/icon.svg"
+    },
+    "permissions": [
+        "storage"
+    ],
+    "host_permissions": [
+        "*://www.youtube.com/*"
+    ],
+    "background": {
+        "service_worker": "background.js",
+        "type": "module"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "*://www.youtube.com/*"
+            ],
+            "js": [
+                "content.js"
+            ],
+            "css": [
+                "content.css"
+            ],
+            "run_at": "document_start",
+            "all_frames": false
+        }
+    ],
+    "action": {
+        "default_popup": "popup/popup.html",
+        "default_icon": {
+            "16": "icons/icon.svg",
+            "48": "icons/icon.svg",
+            "128": "icons/icon.svg"
+        },
+        "default_title": "YouTube Keystrokes Blocker",
+        "theme_icons": [
+            {
+                "light": "icons/icon.svg",
+                "dark": "icons/icon.svg",
+                "size": 16
+            },
+            {
+                "light": "icons/icon.svg",
+                "dark": "icons/icon.svg",
+                "size": 48
+            },
+            {
+                "light": "icons/icon.svg",
+                "dark": "icons/icon.svg",
+                "size": 128
+            }
+        ]
+    },
+    "commands": {
+        "_execute_action": {
+            "suggested_key": {
+                "default": "Alt+Shift+H",
+                "mac": "Command+Shift+H"
+            }
+        }
+    },
+    "options_ui": {
+        "page": "options/options.html",
+        "open_in_tab": true
+    },
+    "web_accessible_resources": [
+        {
+            "resources": [
+                "icons/icon.svg"
+            ],
+            "matches": [
+                "*://www.youtube.com/*"
+            ]
+        }
+    ],
+    "browser_specific_settings": {
+        "gecko": {
+            "id": "youtube-keystrokes-blocker@VKrishna04",
+            "strict_min_version_reason": "Requires Firefox 109+ for Manifest V3 support with background service workers and host_permissions.",
+            "strict_min_version": "109.0",
+            "data_collection_permissions": {
+                "required": [],
+                "optional": []
+            }
+        },
+        "gecko_android": {
+            "strict_min_version": "120.0"
+        }
+    }
+}
