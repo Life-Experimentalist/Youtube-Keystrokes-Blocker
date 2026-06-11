@@ -1,18 +1,20 @@
 {
   "name": "youtube-keystrokes-blocker",
   "version": "5.0.0",
+  "type": "module",
   "description": "Control YouTube keyboard shortcuts with fine-grained settings. Block distracting hotkeys while keeping the ones you need.",
   "main": "disable-yt-hotkeys.user.js",
   "scripts": {
-    "build:chrome": "powershell -NoProfile -ExecutionPolicy Bypass -File ./scripts/Build-Extension.ps1 -Browser chrome",
-    "build:firefox": "powershell -NoProfile -ExecutionPolicy Bypass -File ./scripts/Build-Extension.ps1 -Browser firefox",
-    "build:all": "powershell -NoProfile -ExecutionPolicy Bypass -File ./scripts/Build-All.ps1",
-    "version:major": "powershell -NoProfile -ExecutionPolicy Bypass -File ./scripts/Update-Version.ps1 -Type major",
-    "version:minor": "powershell -NoProfile -ExecutionPolicy Bypass -File ./scripts/Update-Version.ps1 -Type minor",
-    "version:patch": "powershell -NoProfile -ExecutionPolicy Bypass -File ./scripts/Update-Version.ps1 -Type patch",
-    "version:set": "powershell -NoProfile -ExecutionPolicy Bypass -File ./scripts/Update-Version.ps1 -NewVersion",
-    "release": "powershell -NoProfile -ExecutionPolicy Bypass -File ./scripts/Release.ps1",
-    "clean": "powershell -Command \"Get-ChildItem -Path . -Filter *.tmp -File | Remove-Item -ErrorAction Stop; if (Test-Path ./build) { Remove-Item -Path ./build -Recurse -ErrorAction Stop }\""
+    "build": "node scripts/build.js",
+    "build:chrome": "node scripts/build.js --browser chrome",
+    "build:firefox": "node scripts/build.js --browser firefox",
+    "dev": "node scripts/build.js --dev",
+    "dev:chrome": "node scripts/build.js --browser chrome --dev",
+    "dev:firefox": "node scripts/build.js --browser firefox --dev",
+    "version:patch": "node scripts/update-version.js --type patch",
+    "version:minor": "node scripts/update-version.js --type minor",
+    "version:major": "node scripts/update-version.js --type major",
+    "clean": "node -e \"import('fs').then(({default:fs})=>fs.rmSync('build',{recursive:true,force:true}))\""
   },
   "repository": {
     "type": "git",
@@ -39,8 +41,11 @@
   },
   "homepage": "https://yt-hotkeys.vkrishna04.me/",
   "engines": {
-    "node": ">=14.0.0"
+    "node": ">=18.0.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "archiver": "^7.0.1",
+    "sharp": "^0.34.1"
+  },
   "dependencies": {}
 }

@@ -1,6 +1,5 @@
 # Dependencies
 node_modules/
-package-lock.json
 yarn.lock
 
 # Environment files
@@ -36,6 +35,7 @@ build/
 .Spotlight-V100
 .Trashes
 ehthumbs.db
+desktop.ini
 
 # Logs
 logs/
