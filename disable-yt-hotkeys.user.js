@@ -640,67 +640,72 @@
   }
 
   // --- 3. INJECTION: ACTIONS BAR BUTTON (BELOW VIDEO) ---
+
+  // Resolves with the first matching element once it appears under root, or null on timeout.
+  function waitForElement(selector, root, timeoutMs) {
+    return new Promise((resolve) => {
+      const found = root.querySelector(selector);
+      if (found) return resolve(found);
+      let done = false;
+      const obs = new MutationObserver(() => {
+        const el = root.querySelector(selector);
+        if (el && !done) {
+          done = true;
+          obs.disconnect();
+          resolve(el);
+        }
+      });
+      obs.observe(root, { childList: true, subtree: true });
+      setTimeout(() => {
+        if (!done) {
+          done = true;
+          obs.disconnect();
+          resolve(null);
+        }
+      }, timeoutMs);
+    });
+  }
+
   function injectActionButton() {
-    // Check if button already exists
     if (document.getElementById("yt-hk-action-btn")) return;
 
-    // Target the specific header menu by its ID to avoid child panel menus
     const headerMenu = document.querySelector("#header-menu");
+    if (!headerMenu) return;
 
-    if (!headerMenu) {
-      // Header menu not found yet, will retry
-      return;
-    }
-
-    // Find the menu-renderer within the header menu
     const menuRenderer = headerMenu.querySelector("ytd-menu-renderer");
+    if (!menuRenderer) return;
 
-    if (!menuRenderer) {
-      // Menu not found yet, will retry
-      return;
-    }
-
-    // Find the buttons container within this specific menu renderer
     const actionsContainer =
       menuRenderer.querySelector("#top-level-buttons-computed") ||
       menuRenderer.querySelector("#menu-top-level-buttons") ||
       menuRenderer.querySelector("#flexible-item-buttons");
+    if (!actionsContainer) return;
 
-    if (!actionsContainer) {
-      // Container not found yet, will retry with observer
-      return;
-    }
-
-    // 2. Create Wrapper (to match YouTube's flex layout)
     const wrapper = document.createElement("div");
     wrapper.id = "yt-hk-action-btn";
     wrapper.style.display = "inline-block";
-    wrapper.style.marginLeft = "8px"; // Add some spacing between buttons
+    wrapper.style.marginLeft = "8px";
 
-    // 3. Create the Button (Native Look - Pill Shape)
-    // We use YouTube CSS variables to ensure it works in Dark & Light mode automatically
     const btn = document.createElement("button");
     btn.className = "yt-hk-native-pill-btn";
     btn.setAttribute("aria-label", "Hotkey Settings");
 
-    // 4. Icon
     const iconSpan = document.createElement("span");
     iconSpan.className = "yt-hk-icon-wrapper";
     const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
     svg.setAttribute("height", "24");
     svg.setAttribute("viewBox", "0 0 24 24");
     svg.setAttribute("width", "24");
-    svg.style.fill = "currentColor"; // Important: Inherits text color (black/white)
+    svg.style.fill = "currentColor";
 
     const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
     path.setAttribute(
       "d",
-      "M20,5H4C2.9,5,2,5.9,2,7v10c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2V7C22,5.9,21.1,5,20,5z M11,8h2v2h-2V8z M11,11h2v2h-2 V11z M8,8h2v2H8V8z M8,11h2v2H8V11z M7,13H5v-2h2V13z M7,10H5V8h2V10z M16,17H8v-2h8V17z M16,13h-2v-2h2V13z M16,10h-2V8h2V10z M19,13h-2v-2 h2V13z M19,10h-2V8h2V10z",
+      "M20,5H4C2.9,5,2,5.9,2,7v10c0,1.1,0.9,2,2,2h16c1.1,0,2-0.9,2-2V7C22,5.9,21.1,5,20,5z M11,8h2v2h-2V8z M11,11h2v2h-2V11z M8,8h2v2H8V8z M8,11h2v2H8V11z M7,13H5v-2h2V13z M7,10H5V8h2V10z M16,17H8v-2h8V17z M16,13h-2v-2h2V13z M16,10h-2V8h2V10z M19,13h-2v-2h2V13z M19,10h-2V8h2V10z",
     );
     svg.appendChild(path);
     iconSpan.appendChild(svg);
 
-    // 5. Text Label
     const textSpan = document.createElement("span");
     textSpan.textContent = "Hotkeys";
     textSpan.style.marginLeft = "6px";
@@ -710,191 +715,55 @@
 
     btn.append(iconSpan, textSpan);
     btn.onclick = openSettings;
-
     wrapper.appendChild(btn);
 
-    // 6. Insert into DOM at the beginning of the actions container
-    // This ensures it appears before other buttons
     actionsContainer.insertBefore(wrapper, actionsContainer.firstChild);
   }
 
-  // --- 4. OBSERVER LOGIC WITH PROPER TIMING ---
-  let isInjecting = false;
-  let injectionTimeout = null;
-  let observerDebounceTimer = null;
-
-  // Remove the injected button (called on navigation start so the guard doesn't block re-injection)
-  function removeActionButton() {
-    const existing = document.getElementById("yt-hk-action-btn");
-    if (existing) existing.remove();
-  }
-
-  // Improved injection with better timing and waiting for specific elements
-  async function tryInjectWithRetry() {
-    if (isInjecting) return;
-    isInjecting = true;
-
-    // Don't try if button already exists (only skip when we KNOW it's there after this navigation)
-    if (document.getElementById("yt-hk-action-btn")) {
-      isInjecting = false;
-      return;
-    }
-
-    // Wait for the video player and actions container to be present
-    const maxAttempts = 50; // Increased to handle banner cases
-    const baseDelay = 50;
-
-    for (let i = 0; i < maxAttempts; i++) {
-      // Check if we're on a watch page
-      if (!window.location.pathname.startsWith("/watch")) {
-        isInjecting = false;
-        return;
-      }
-
-      // Check if button already exists (another attempt might have succeeded)
-      if (document.getElementById("yt-hk-action-btn")) {
-        isInjecting = false;
-        return;
-      }
-
-      // Look for the header menu and the menu renderer within it
-      const headerMenu = document.querySelector("#header-menu");
-      if (headerMenu) {
-        const menuRenderer = headerMenu.querySelector("ytd-menu-renderer");
-        if (menuRenderer) {
-          const actionsContainer =
-            menuRenderer.querySelector("#top-level-buttons-computed") ||
-            menuRenderer.querySelector("#menu-top-level-buttons") ||
-            menuRenderer.querySelector("#flexible-item-buttons");
-
-          if (actionsContainer) {
-            // All elements are ready, inject now
-            injectActionButton();
-            isInjecting = false;
-            return;
-          }
-        }
-      }
-
-      // Exponential backoff: wait longer each attempt, but slower growth
-      const delay = baseDelay * Math.pow(1.15, i);
-      await new Promise((resolve) => setTimeout(resolve, delay));
-    }
-
-    isInjecting = false;
-  }
-
-  // Watch for YouTube's SPA navigation events
-  function handleNavigationStart() {
-    // Eagerly remove the old button so the guard in tryInjectWithRetry won't
-    // falsely detect it as already injected on the new page.
-    removeActionButton();
-    if (injectionTimeout) clearTimeout(injectionTimeout);
-    isInjecting = false;
-  }
-
-  function handlePageChange() {
-    // Clear any pending timeout
-    if (injectionTimeout) clearTimeout(injectionTimeout);
-
-    // Reset injection state on navigation (only if not already trying)
-    isInjecting = false;
-
-    // Remove stale button in case yt-navigate-start didn't fire
-    removeActionButton();
-
-    // Try injection after a short delay to let the page render
-    injectionTimeout = setTimeout(() => tryInjectWithRetry(), 100);
-  }
-
-  // Listen for YouTube's navigation events (SPA)
-  // yt-navigate-start fires immediately when navigation begins – use it to clear the old button
-  document.addEventListener("yt-navigate-start", handleNavigationStart);
-  document.addEventListener("yt-navigate-finish", handlePageChange);
-  document.addEventListener("yt-page-data-updated", (e) => {
-    // yt-page-data-updated fires multiple times; only act if injection isn't already running
-    if (!isInjecting) handlePageChange();
-  });
-
-  // Backup: MutationObserver to catch when the actions container appears
-  // Debounced to avoid hammering tryInjectWithRetry on every DOM mutation.
-  const observer = new MutationObserver(() => {
-    // Only observe if on a watch page and button doesn't exist
+  async function tryInjectButton() {
     if (!window.location.pathname.startsWith("/watch")) return;
     if (document.getElementById("yt-hk-action-btn")) return;
-    if (isInjecting) return;
 
-    // Debounce: wait 80 ms of quiet DOM before attempting injection
-    if (observerDebounceTimer) clearTimeout(observerDebounceTimer);
-    observerDebounceTimer = setTimeout(() => {
-      if (!document.getElementById("yt-hk-action-btn") && !isInjecting) {
-        tryInjectWithRetry();
-      }
-    }, 80);
+    const headerMenu = await waitForElement("#header-menu", document, 15000);
+    if (!headerMenu || document.getElementById("yt-hk-action-btn")) return;
+
+    const menuRenderer = await waitForElement(
+      "ytd-menu-renderer",
+      headerMenu,
+      10000
+    );
+    if (!menuRenderer || document.getElementById("yt-hk-action-btn")) return;
+
+    const container = await waitForElement(
+      "#top-level-buttons-computed, #menu-top-level-buttons, #flexible-item-buttons",
+      menuRenderer,
+      10000
+    );
+    if (!container || document.getElementById("yt-hk-action-btn")) return;
+
+    injectActionButton();
+  }
+
+  function removeActionButton() {
+    document.getElementById("yt-hk-action-btn")?.remove();
+  }
+
+  // --- 4. NAVIGATION & INITIAL INJECTION ---
+
+  // SPA navigation: clear old button immediately, inject after navigation completes
+  document.addEventListener("yt-navigate-start", removeActionButton);
+  document.addEventListener("yt-navigate-finish", tryInjectButton);
+  document.addEventListener("yt-page-data-updated", () => {
+    if (!document.getElementById("yt-hk-action-btn")) tryInjectButton();
   });
 
-  // Start observing immediately once DOM is ready
-  function startObserver() {
-    if (document.body) {
-      observer.observe(document.body, {
-        childList: true,
-        subtree: true,
-        attributes: false,
-      });
-    }
-  }
-
-  // Start observing as early as possible
-  if (document.body) {
-    startObserver();
-  } else {
-    document.addEventListener("DOMContentLoaded", startObserver);
-  }
-
-  // Initial injection attempts - more aggressive on first load
-  function scheduleInitialInjection() {
-    // Try immediately
-    tryInjectWithRetry();
-
-    // Also try after a short delay
-    setTimeout(() => {
-      if (
-        !document.getElementById("yt-hk-action-btn") &&
-        !isInjecting &&
-        window.location.pathname.startsWith("/watch")
-      ) {
-        tryInjectWithRetry();
-      }
-    }, 300);
-
-    // And again after a bit longer
-    setTimeout(() => {
-      if (
-        !document.getElementById("yt-hk-action-btn") &&
-        !isInjecting &&
-        window.location.pathname.startsWith("/watch")
-      ) {
-        tryInjectWithRetry();
-      }
-    }, 800);
-
-    // One more attempt for cases with slow-loading banners
-    setTimeout(() => {
-      if (
-        !document.getElementById("yt-hk-action-btn") &&
-        !isInjecting &&
-        window.location.pathname.startsWith("/watch")
-      ) {
-        tryInjectWithRetry();
-      }
-    }, 1500);
-  }
-
+  // Initial injection for direct page loads to /watch
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", scheduleInitialInjection);
+    document.addEventListener("DOMContentLoaded", () =>
+      setTimeout(tryInjectButton, 100)
+    );
   } else {
-    // DOM already loaded, schedule injection
-    scheduleInitialInjection();
+    setTimeout(tryInjectButton, 100);
   }
 
   // Fallback Tampermonkey Menu
