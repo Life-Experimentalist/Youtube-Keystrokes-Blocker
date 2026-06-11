@@ -18,8 +18,9 @@
         "*://www.youtube.com/*"
     ],
     "background": {
-        "service_worker": "background.js",
-        "type": "module"
+        "scripts": [
+            "background.js"
+        ]
     },
     "content_scripts": [
         {
@@ -87,12 +88,7 @@
     "browser_specific_settings": {
         "gecko": {
             "id": "youtube-keystrokes-blocker@VKrishna04",
-            "strict_min_version_reason": "Requires Firefox 109+ for Manifest V3 support with background service workers and host_permissions.",
-            "strict_min_version": "109.0",
-            "data_collection_permissions": {
-                "required": [],
-                "optional": []
-            }
+            "strict_min_version": "112.0"
         },
         "gecko_android": {
             "strict_min_version": "120.0"
