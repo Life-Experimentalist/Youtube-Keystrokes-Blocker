@@ -92,9 +92,12 @@ async function generateIcons(iconsDir) {
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
+const SKIP_FILES = new Set(["desktop.ini", "Thumbs.db", ".DS_Store"]);
+
 function copyDir(src, dest) {
   fs.mkdirSync(dest, { recursive: true });
   for (const entry of fs.readdirSync(src, { withFileTypes: true })) {
+    if (SKIP_FILES.has(entry.name)) continue;
     const srcPath = path.join(src, entry.name);
     const destPath = path.join(dest, entry.name);
     if (entry.isDirectory()) copyDir(srcPath, destPath);
